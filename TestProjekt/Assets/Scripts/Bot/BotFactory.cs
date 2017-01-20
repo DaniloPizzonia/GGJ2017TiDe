@@ -8,5 +8,11 @@ namespace unsernamespace
 {
 	public class BotFactory : RootComponent
 	{
+        public Bot CreateBot()
+        {
+            Bot bot = new Bot();
+
+            return bot;
+        }
 	}
 }
