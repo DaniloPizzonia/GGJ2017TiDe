@@ -21,12 +21,14 @@ namespace unsernamespace
 		public UnityEvent onShot = new UnityEvent();
 		public UnityEvent OnShoot { get { return onShot; } }
 
-		public void Attack()
+		public bool Attack()
 		{
-			if ( attack() )
+			bool success = attack();
+			if ( success )
 			{
 				onAttack.Invoke();
 			}
+			return success;
 		}
 
 		protected abstract bool attack();

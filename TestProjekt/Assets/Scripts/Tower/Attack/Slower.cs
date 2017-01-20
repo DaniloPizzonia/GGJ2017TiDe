@@ -17,6 +17,7 @@ namespace unsernamespace
 
 			if ( null != nearest )
 			{
+				transform.LookAt( nearest.transform );
 				Shot( nearest , new Speed( amount , nearest ) );
 				return true;
 			}
