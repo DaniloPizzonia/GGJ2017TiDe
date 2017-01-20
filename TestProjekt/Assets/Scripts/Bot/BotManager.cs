@@ -28,5 +28,10 @@ namespace unsernamespace
             bots.Add(spawnedBot);
             return spawnedBot;
         }
+
+        public void Unregister(Bot botToDestroy)
+        {
+            bots.Remove(botToDestroy);
+        }
     }
 }
