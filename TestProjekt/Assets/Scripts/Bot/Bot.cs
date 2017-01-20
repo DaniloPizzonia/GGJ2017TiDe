@@ -18,7 +18,11 @@ namespace unsernamespace
 		public UnityEvent onChangeHealth = new UnityEvent();
 		public UnityEvent OnChangeHealth { get { return onChangeHealth; } }
 
-		[SerializeField]
+        [SerializeField]
+        public UnityEvent onDie = new UnityEvent();
+        public UnityEvent OnDie { get { return onDie; } }
+
+        [SerializeField]
 		public UnityEvent onChangeSpeed = new UnityEvent();
 		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
 
@@ -33,7 +37,7 @@ namespace unsernamespace
 			{
 				health = value;
 				onChangeHealth.Invoke();
-			}
+            }
 		}
 
 		public float Speed
@@ -51,6 +55,17 @@ namespace unsernamespace
         void OnDestroy()
         {
             Root.I.Get<BotManager>().Unregister(this);
+        }
+        void Awake()
+        {
+            OnChangeHealth.AddListener(CheckHealth);
+        }
+        private void CheckHealth()
+        {
+            if (Health<=0)
+            {
+                Destroy(gameObject);
+            }
         }
 	}
 }
