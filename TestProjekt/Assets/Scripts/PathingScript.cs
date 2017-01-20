@@ -6,7 +6,7 @@ namespace unsernamespace {
     public class PathingScript : MonoBehaviour
     {
         [SerializeField]
-        Bot bot;
+        private Bot bot;
         // Please lock the rotation of the enemy!
 
 
