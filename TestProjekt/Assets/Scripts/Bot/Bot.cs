@@ -48,5 +48,9 @@ namespace unsernamespace
 				onChangeSpeed.Invoke();
 			}
 		}
+        void OnDestroy()
+        {
+            Root.I.Get<BotManager>().Unregister(this);
+        }
 	}
 }
