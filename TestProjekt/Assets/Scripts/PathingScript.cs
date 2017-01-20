@@ -2,92 +2,92 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathingScript : MonoBehaviour 
-{
-	// Please lock the rotation of the enemy!
+namespace unsernamespace {
+    public class PathingScript : MonoBehaviour
+    {
+        [SerializeField]
+        Bot bot;
+        // Please lock the rotation of the enemy!
 
 
-	// GameObject, that includes every pathNode as a child
-	GameObject pathNodeParent;
+        // GameObject, that includes every pathNode as a child
+        GameObject pathNodeParent;
 
-	// Transform of the current pathNode the enemy is walking to
-	Transform targetPathNode = null;
+        // Transform of the current pathNode the enemy is walking to
+        Transform targetPathNode = null;
 
-	// Current Child used for the transform
-	int currentPathNodeIndex;
-
-	float speed = 5;
-
-	void Start ()
-	{
-		pathNodeParent = GameObject.FindGameObjectWithTag ("Path");
-	}
+        // Current Child used for the transform
+        int currentPathNodeIndex;
+        void Start()
+        {
+            pathNodeParent = GameObject.FindGameObjectWithTag("Path");
+        }
 
 
-	void GetNextPathNode()
-	{
-		if (currentPathNodeIndex < pathNodeParent.transform.childCount)
-		{
-			targetPathNode = pathNodeParent.transform.GetChild (currentPathNodeIndex);
-			currentPathNodeIndex++;
-		}
+        void GetNextPathNode()
+        {
+            if (currentPathNodeIndex < pathNodeParent.transform.childCount)
+            {
+                targetPathNode = pathNodeParent.transform.GetChild(currentPathNodeIndex);
+                currentPathNodeIndex++;
+            }
 
-		else
-		{
-			Debug.Log ("Exit reached.");
-			targetPathNode = null;
-			ExitReached ();
-		}
-	}
-
-
-	void ExitReached()
-	{
-		Destroy (gameObject);
-	}
+            else
+            {
+                Debug.Log("Exit reached.");
+                targetPathNode = null;
+                ExitReached();
+            }
+        }
 
 
-	void Update()
-	{
-		// Assign PathNode
-		if (targetPathNode == null)
-		{
-			GetNextPathNode ();
-
-			// If no PathNodes are set
-			if (targetPathNode == null)
-			{
-				Debug.LogError ("Cannot found PathNodes!");
-				ExitReached ();
-				return;
-			}
-		}
+        void ExitReached()
+        {
+            Destroy(gameObject);
+        }
 
 
-		Vector3 nextPathVector = targetPathNode.position - this.transform.localPosition;
+        void Update()
+        {
+            // Assign PathNode
+            if (targetPathNode == null)
+            {
+                GetNextPathNode();
 
-		Debug.Log ("TargetPos:  " + targetPathNode.position + "EnemyPos: " + this.transform.localPosition + "Movement: " + nextPathVector);
+                // If no PathNodes are set
+                if (targetPathNode == null)
+                {
+                    Debug.LogError("Cannot found PathNodes!");
+                    ExitReached();
+                    return;
+                }
+            }
 
-		float distance = speed * Time.deltaTime;
 
-		if (nextPathVector.magnitude <= distance)
-		{
-			// When Node reached, assign targetPathNode = null to assign new PathNode
-			Debug.Log ("Node Reached: " + targetPathNode.name);
-			targetPathNode = null;
-		}
+            Vector3 nextPathVector = targetPathNode.position - this.transform.localPosition;
 
-		// Movement
-		transform.Translate (nextPathVector.normalized * distance, Space.World);
+            Debug.Log("TargetPos:  " + targetPathNode.position + "EnemyPos: " + this.transform.localPosition + "Movement: " + nextPathVector);
 
-		// Rotation
-		Quaternion rotation = Quaternion.LookRotation (nextPathVector);
-		this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, Time.deltaTime * 5);
+            float distance = bot.Speed * Time.deltaTime;
 
-	}
+            if (nextPathVector.magnitude <= distance)
+            {
+                // When Node reached, assign targetPathNode = null to assign new PathNode
+                Debug.Log("Node Reached: " + targetPathNode.name);
+                targetPathNode = null;
+            }
+
+            // Movement
+            transform.Translate(nextPathVector.normalized * distance, Space.World);
+
+            // Rotation
+            Quaternion rotation = Quaternion.LookRotation(nextPathVector);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, Time.deltaTime * 5);
+
+        }
 
 
 
-
+    }
 
 }
