@@ -7,13 +7,19 @@ namespace unsernamespace
 {
     public class BotManager : RootComponent
     {
-        private List<Bot> bots = new List<Bot>();
-        
-
-        public Bot Bot
+        public BotManager()
         {
-            get { throw new System.NotImplementedException(); }
-            set { }
+            Timer timer = new Timer(1, () =>
+            {
+                SpawnBot();
+            });
+        }
+        private List<Bot> bots = new List<Bot>();
+
+
+        public Bot[] AllBots
+        {
+            get { return bots.ToArray(); }
         }
 
         public Bot SpawnBot()
