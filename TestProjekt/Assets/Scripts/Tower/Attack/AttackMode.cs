@@ -6,7 +6,13 @@ using System.Text;
 
 namespace unsernamespace
 {
-	public class AttackMode
+	public abstract class AttackMode
 	{
+		public abstract ModeType Type
+		{
+			get;
+		}
+
+		public abstract bool Attack();
 	}
 }

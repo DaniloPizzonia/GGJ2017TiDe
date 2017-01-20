@@ -44,3 +44,4 @@ namespace unsernamespace
 			return component_collection[ type ] as T;
 		}
 	}
+}
