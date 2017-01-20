@@ -18,5 +18,10 @@ namespace unsernamespace
 			{
 			}
 		}
+
+        public Bot SpawnBot()
+        {
+
+        }
 	}
 }

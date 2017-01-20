@@ -9,16 +9,26 @@ namespace unsernamespace
 {
 	public class Bot : MonoBehaviour
 	{
+        
+        public Bot()
+        {
+
+        }
+        public Bot(float health, float speed)
+        {
+            this.Health = health;
+            this.Speed = speed;
+        }
 		private float health;
 		private float speed;
 
 		[SerializeField]
-		public UnityEvent onChangHalth = new UnityEvent();
-		public UnityEvent OnChgangeHalth { get { return onChangHalth; } }
+		public UnityEvent onChangeHealth = new UnityEvent();
+		public UnityEvent OnChangeHealth { get { return onChangeHealth; } }
 
 		[SerializeField]
-		public UnityEvent onChangSpeed = new UnityEvent();
-		public UnityEvent OnChangSpeed { get { return onChangSpeed; } }
+		public UnityEvent onChangeSpeed = new UnityEvent();
+		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
 
 		public float Health
 		{
@@ -29,7 +39,7 @@ namespace unsernamespace
 			set
 			{
 				health = value;
-				onChangHalth.Invoke();
+				onChangeHealth.Invoke();
 			}
 		}
 
@@ -42,7 +52,7 @@ namespace unsernamespace
 			set
 			{
 				speed = value;
-				onChangSpeed.Invoke();
+				onChangeSpeed.Invoke();
 			}
 		}
 	}
