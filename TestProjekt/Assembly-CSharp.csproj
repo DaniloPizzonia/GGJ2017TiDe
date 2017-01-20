@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\Bot\Bot.cs" />
      <Compile Include="Assets\Scripts\Bot\BotFactory.cs" />
      <Compile Include="Assets\Scripts\Bot\BotManager.cs" />
+     <Compile Include="Assets\Scripts\Load.cs" />
+     <Compile Include="Assets\Scripts\PathingScript.cs" />
      <Compile Include="Assets\Scripts\Root.cs" />
      <Compile Include="Assets\Scripts\RootComponent.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
