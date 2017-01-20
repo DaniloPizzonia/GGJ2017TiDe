@@ -18,7 +18,7 @@ namespace unsernamespace
 
         public Bot SpawnBot()
         {
-            var spawnedBot = Root.I.Get<BotFactory>().CreateBot();
+            Bot spawnedBot = Root.I.Get<BotFactory>().CreateBot();
             bots.Add(spawnedBot);
             return spawnedBot;
         }
