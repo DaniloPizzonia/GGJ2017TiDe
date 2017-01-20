@@ -6,19 +6,16 @@ using System.Text;
 
 namespace unsernamespace
 {
-	public class SingleTarget : AttackMode
+	public class SingleTarget : AOE
 	{
-		public override ModeType Type
+		protected override Bot[] get_target_list()
 		{
-			get
+			Bot bot = base.get_target_list().ElementAtOrDefault( 0 );
+			if ( null != bot )
 			{
-				return ModeType.SingleTarget;
+				return new Bot[] { bot };
 			}
-		}
-
-		public override bool Attack()
-		{
-			throw new NotImplementedException();
+			return new Bot[ 0 ];
 		}
 	}
 }

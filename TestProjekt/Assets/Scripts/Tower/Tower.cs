@@ -9,17 +9,8 @@ namespace unsernamespace
 {
 	public class Tower : MonoBehaviour
 	{
-		private float health;
-		private float speed;
-		private AttackMode attack_mode;
-
 		[SerializeField]
-		private ModeType attack_type;
-
-		private void Awake()
-		{
-			attack_mode = Root.I.Get<AttackModeManager>().GetModeOfType( attack_type );
-		}
+		private AttackMode attack_mode;
 
 		public void Attack()
 		{
