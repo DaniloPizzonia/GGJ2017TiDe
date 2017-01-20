@@ -19,9 +19,9 @@ namespace unsernamespace
 			}
 		}
 
-        public Bot SpawnBot()
+      /*  public Bot SpawnBot()
         {
 
-        }
+        }*/
 	}
 }
