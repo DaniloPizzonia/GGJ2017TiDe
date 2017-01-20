@@ -9,7 +9,9 @@ namespace unsernamespace
 {
 	public class Bot : MonoBehaviour
 	{
+        [SerializeField]
 		private float health;
+        [SerializeField]
 		private float speed;
 
 		[SerializeField]
@@ -19,6 +21,7 @@ namespace unsernamespace
 		[SerializeField]
 		public UnityEvent onChangeSpeed = new UnityEvent();
 		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
+
 
 		public float Health
 		{
