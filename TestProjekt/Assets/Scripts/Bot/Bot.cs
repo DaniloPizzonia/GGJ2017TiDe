@@ -9,16 +9,6 @@ namespace unsernamespace
 {
 	public class Bot : MonoBehaviour
 	{
-        
-        public Bot()
-        {
-
-        }
-        public Bot(float health, float speed)
-        {
-            this.Health = health;
-            this.Speed = speed;
-        }
 		private float health;
 		private float speed;
 
