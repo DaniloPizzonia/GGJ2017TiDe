@@ -23,6 +23,7 @@ namespace unsernamespace
        
 
         public float LevelFactor { get { return 2.3f; } }
+        public float DamageRange { get { return 5.0f; } }
 
     }
 }
