@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+namespace unsernamespace
+{
+    public class Player : RootComponent
+    {
+        [SerializeField]
+        private int lifepoints;
+        [SerializeField]
+        private int money;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        public int Lifepoints { get { return lifepoints; } set { value = lifepoints; } }
+        public int Money { get { return money; } set {value = money; } }
+
+        public void ReduceLifepoints()
+        {
+            this.Lifepoints--;
+        }
+        public void ReduceMoney(int price)
+        {
+            
+        }
+    }
+
 }
