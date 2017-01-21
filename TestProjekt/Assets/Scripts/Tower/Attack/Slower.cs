@@ -9,20 +9,25 @@ namespace unsernamespace
 	public class Slower : AttackMode
 	{
 		[SerializeField]
-		private float amount;
+		private float damage;
+		[SerializeField]
+		private float range = 0;
 
 		protected override bool attack()
 		{
-			Bot nearest = Root.I.Get<BotManager>().AllBots.OrderBy( a => Vector3.Distance( a.transform.position , transform.position ) ).FirstOrDefault();
+			Bot[] bot_list = get_target_list();
 
-			if ( null != nearest )
+			foreach ( Bot target in bot_list)
 			{
-				transform.LookAt( nearest.transform );
-				Shot( nearest , new Speed( amount , nearest ) );
-				return true;
+				Shot( target , new Speed( damage , target ) );
 			}
 
-			return false;
+			return bot_list.Length > 0;
+		}
+
+		protected virtual Bot[] get_target_list()
+		{
+			return Root.I.Get<BotManager>().AllBots.Where( a => Vector3.Distance( transform.position , a.transform.position ) <= range ).ToArray();
 		}
 	}
 }

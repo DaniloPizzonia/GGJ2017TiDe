@@ -6,28 +6,14 @@ using UnityEngine;
 
 namespace unsernamespace
 {
-	public class AOE : AttackMode
+	public class AOE : SingleTarget
 	{
 		[SerializeField]
-		private float damage;
-		[SerializeField]
-		private float range = 0;
+		private float damage_range;
 
-		protected override bool attack()
+		protected override DamageEffect get_damage_effect( Bot target ,float damage )
 		{
-			Bot[] bot_list = get_target_list();
-
-			foreach ( Bot target in bot_list)
-			{
-				Shot( target , new Damage( damage , target ) );
-			}
-
-			return bot_list.Length > 0;
-		}
-
-		protected virtual Bot[] get_target_list()
-		{
-			return Root.I.Get<BotManager>().AllBots.Where( a => Vector3.Distance( transform.position , a.transform.position ) <= range ).ToArray();
+			return new FieldDamage( damage , damage_range , target );
 		}
 	}
 }
