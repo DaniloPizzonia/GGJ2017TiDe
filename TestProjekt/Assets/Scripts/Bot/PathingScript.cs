@@ -54,10 +54,8 @@ namespace unsernamespace {
             {
                 GetNextPathNode();
 
-                // If no PathNodes are set
                 if (targetPathNode == null)
                 {
-                    Debug.LogError("Cannot found PathNodes!");
                     ExitReached();
                     return;
                 }
@@ -66,7 +64,6 @@ namespace unsernamespace {
 
             Vector3 nextPathVector = targetPathNode.position - this.transform.localPosition;
 
-            Debug.Log("TargetPos:  " + targetPathNode.position + "EnemyPos: " + this.transform.localPosition + "Movement: " + nextPathVector);
 
             float distance = bot.Speed * Time.deltaTime;
 
@@ -80,9 +77,9 @@ namespace unsernamespace {
             // Movement
             transform.Translate(nextPathVector.normalized * distance, Space.World);
 
-            // Rotation
+/*            // Rotation
             Quaternion rotation = Quaternion.LookRotation(nextPathVector);
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, Time.deltaTime * 5);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, Time.deltaTime * 5);*/
 
         }
 
