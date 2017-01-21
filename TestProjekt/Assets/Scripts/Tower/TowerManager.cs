@@ -49,5 +49,10 @@ namespace unsernamespace
 				}
 			}
 		}
+
+		public int Price()
+		{
+			return Root.I.Get<GameConfig>().TowerPrice;
+		}
 	}
 }

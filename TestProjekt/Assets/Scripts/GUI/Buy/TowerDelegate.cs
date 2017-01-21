@@ -23,6 +23,14 @@ namespace unsernamespace
 		private TowerContainer current_target = null;
 		private Vector3 last_mouse_position;
 
+		public int Price
+		{
+			get
+			{
+				return Root.I.Get<TowerManager>().Price();
+			}
+		}
+
 		private void Update()
 		{
 			if ( last_mouse_position != Input.mousePosition )
@@ -37,7 +45,10 @@ namespace unsernamespace
 
 			if ( Input.GetMouseButtonUp ( 0 ) )
 			{
-				if ( null != current_target )
+				if (
+						null != current_target
+					&&	Root.I.Get<Player>().Buy( Price )
+				)
 				{
 					Root.I.Get<TowerManager>().Create( prefab , current_target );
 					onApply.Invoke();

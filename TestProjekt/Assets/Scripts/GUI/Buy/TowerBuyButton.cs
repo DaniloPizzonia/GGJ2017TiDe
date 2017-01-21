@@ -28,6 +28,22 @@ namespace unsernamespace
 			}
 		}
 
+		protected int price
+		{
+			get
+			{
+				return delegate_prefab.GetComponent<TowerDelegate>().Price;
+			}
+		}
+
+		protected bool buyable
+		{
+			get
+			{
+				return Root.I.Get<Player>().CheckMoney( price ); ;
+			}
+		}
+
 
 		public void Click()
 		{
@@ -39,9 +55,12 @@ namespace unsernamespace
 				||	current != last_instance
 			)
 			{
-				GameObject container = Instantiate( delegate_prefab );
-				TowerDelegate new_delegate = container.GetComponent<TowerDelegate>();
-				new_delegate.onLeave.AddListener( clear );
+				if ( buyable )
+				{
+					GameObject container = Instantiate( delegate_prefab );
+					TowerDelegate new_delegate = container.GetComponent<TowerDelegate>();
+					new_delegate.onLeave.AddListener( clear );
+				}
 			}
 
 			update_icon();
@@ -76,6 +95,11 @@ namespace unsernamespace
 			else
 			{
 				image.sprite = icon_normal;
+				Button button = image.GetComponent<Button>();
+				if ( null != button )
+				{
+					button.interactable = buyable;
+				}
 			}
 		}
 	}
