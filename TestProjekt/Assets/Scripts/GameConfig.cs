@@ -20,6 +20,9 @@ namespace unsernamespace
         //Player
         public int PlayerMoney { get { return 1500; } }
         public int PlayerLives { get { return 50; } }
+       
+
+        public float LevelFactor { get { return 2.3f; } }
 
     }
 }
