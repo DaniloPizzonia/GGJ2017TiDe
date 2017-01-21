@@ -9,15 +9,25 @@ namespace unsernamespace
 	{
 		private Dictionary<string , string> data = new Dictionary<string , string>()
 		{
-			{ "HighTide" , "Ebbe" },
-			{ "LowTide" , "Flut" }
+			{ "HighTide" , "High Tide" },
+			{ "LowTide" , "Low Tide" },
+			{ "CoinPrefix" , "Coin: " },
+			{ "LifePrefix" , "Life: " },
+			{ "GameModeTimer" , "Next wave in: {0} seconds" }
 		};
 
 		public string this[ string key ]
 		{
 			get
 			{
-				return data[ key ];
+				lock ( data )
+				{
+					if ( !data.ContainsKey( key ) )
+					{
+						return "";
+					}
+					return data[ key ];
+				}
 			}
 		}
 

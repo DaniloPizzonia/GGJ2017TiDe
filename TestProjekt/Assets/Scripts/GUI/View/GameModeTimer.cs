@@ -19,7 +19,8 @@ namespace unsernamespace
 			LowTide mode = Root.I.Get<GameModeManager>().Current as LowTide;
 			if ( mode != null )
 			{
-				output.text = Mathf.FloorToInt( mode.TimeLeft ).ToString();
+				string text = Root.I.Get<Localization>()[ "GameModeTimer" ];
+				output.text = string.Format( text , Mathf.FloorToInt( mode.TimeLeft ).ToString() );
 			}
 		}
 	}

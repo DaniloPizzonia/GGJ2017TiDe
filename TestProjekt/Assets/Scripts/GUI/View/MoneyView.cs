@@ -22,7 +22,8 @@ namespace unsernamespace
 		{
 			if ( null != output )
 			{
-				output.text = Root.I.Get<Player>().Money.ToString();
+				output.text = Root.I.Get<Localization>()[ "CoinPrefix" ] 
+					+ Root.I.Get<Player>().Money.ToString();
 			}
 		}
 	}

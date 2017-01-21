@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 namespace unsernamespace
 {
-	public class LifeView : MonoBehaviour
+	public class GameModeNameView : MonoBehaviour
 	{
 		private Text output = null;
 
 		private void Awake()
 		{
 			output = GetComponent<Text>();
-			Root.I.Get<Player>().OnChangeLife.AddListener( update_view );
+			Root.I.Get<GameModeManager>().OnChange.AddListener( update_view );
 			update_view();
 		}
 
@@ -22,8 +22,8 @@ namespace unsernamespace
 		{
 			if ( null != output )
 			{
-				output.text = Root.I.Get<Localization>()[ "LifePrefix" ]
-					+ Root.I.Get<Player>().Life.ToString();
+				string mode = Root.I.Get<GameModeManager>().Current.Type.ToString();
+				output.text = Root.I.Get<Localization>()[ mode ];
 			}
 		}
 	}
