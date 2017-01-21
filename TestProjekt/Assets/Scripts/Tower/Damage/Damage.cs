@@ -18,15 +18,14 @@ namespace unsernamespace
 			}
 		}
 		
-		public Damage( float value )
+		public Damage( float value , Bot target ) : base( target )
 		{
 			internal_value = value;
 		}
 
-		public override bool Apply( Bot bot )
+		protected override void apply( Bot bot )
 		{
 			bot.Health -= internal_value;
-			return true;
 		}
 	}
 }

@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace unsernamespace
 {
 	public class Slower : AttackMode
 	{
-		public override ModeType Type
-		{
-			get
-			{
-				return ModeType.Slower;
-			}
-		}
+		[SerializeField]
+		private float amount;
 
-		public override bool Attack()
+		protected override bool attack()
 		{
-			throw new NotImplementedException();
+			Bot nearest = Root.I.Get<BotManager>().AllBots.OrderBy( a => Vector3.Distance( a.transform.position , transform.position ) ).FirstOrDefault();
+
+			if ( null != nearest )
+			{
+				transform.LookAt( nearest.transform );
+				Shot( nearest , new Speed( amount , nearest ) );
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

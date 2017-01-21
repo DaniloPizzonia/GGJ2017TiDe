@@ -9,23 +9,29 @@ namespace unsernamespace
 {
 	public class Tower : MonoBehaviour
 	{
-		private float health;
-		private float speed;
-		private AttackMode attack_mode;
-
 		[SerializeField]
-		private ModeType attack_type;
+		private AttackMode attack_mode;
+		[SerializeField]
+		private float cooldown;
 
-		private void Awake()
-		{
-			attack_mode = Root.I.Get<AttackModeManager>().GetModeOfType( attack_type );
-		}
+		private float last_shoot;
 
 		public void Attack()
 		{
-			if ( null != attack_mode )
+			if (
+					null != attack_mode
+				&&	attack_mode.Attack()
+			)
 			{
-				attack_mode.Attack();
+				last_shoot = Time.time;
+			}
+		}
+
+		private void Update()
+		{
+			if ( Time.time - last_shoot > cooldown )
+			{
+				Attack();
 			}
 		}
 	}

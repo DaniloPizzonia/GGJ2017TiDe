@@ -18,15 +18,14 @@ namespace unsernamespace
 			}
 		}
 
-		public Speed( float value )
+		public Speed( float value , Bot target ) : base ( target )
 		{
 			internal_value = value;
 		}
 
-		public override bool Apply( Bot bot )
+		protected override void apply( Bot bot )
 		{
 			bot.Speed -= internal_value;
-			return true;
 		}
 	}
 }
