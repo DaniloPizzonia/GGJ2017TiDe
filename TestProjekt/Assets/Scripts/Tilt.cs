@@ -22,19 +22,19 @@ public class Tilt : MonoBehaviour
 		if (Input.anyKey) 
 		{
 			if (Input.GetKey (KeyCode.A)) {
-				rb.AddForce (-transform.right * tiltSpeed);
-			}
-
-			if (Input.GetKey (KeyCode.D)) {
 				rb.AddForce (transform.right * tiltSpeed);
 			}
 
+			if (Input.GetKey (KeyCode.D)) {
+				rb.AddForce (-transform.right * tiltSpeed);
+			}
+
 			if (Input.GetKey (KeyCode.W)) {
-				rb.AddForce (transform.forward * tiltSpeed);
+				rb.AddForce (-transform.forward * tiltSpeed);
 			}
 
 			if (Input.GetKey (KeyCode.S)) {
-				rb.AddForce (-transform.forward * tiltSpeed);
+				rb.AddForce (transform.forward * tiltSpeed);
 			}
 		}
 			
