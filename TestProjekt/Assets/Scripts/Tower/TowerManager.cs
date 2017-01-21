@@ -18,9 +18,11 @@ namespace unsernamespace
 			}
 		}
 
-		public Tower Create( GameObject prefab , Action<Tower> callback=null )
+		public Tower Create( GameObject prefab , TowerContainer parent , Action<Tower> callback=null )
 		{
 			GameObject container = GameObject.Instantiate( prefab );
+			container.transform.SetParent( parent.transform , true );
+			container.transform.localPosition = Vector3.zero;
 			Tower tower = container.GetComponent<Tower>();
 			if ( null == tower )
 			{
