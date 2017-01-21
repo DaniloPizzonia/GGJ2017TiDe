@@ -9,7 +9,6 @@ namespace unsernamespace
 {
 	public class Bot : MonoBehaviour
 	{
-        [SerializeField]
 		private float health;
         [SerializeField]
 		private float speed;
@@ -54,6 +53,18 @@ namespace unsernamespace
 			}
 		}
 
+		public int MaxHealth
+		{
+			get
+			{
+				return Mathf.CeilToInt( Root.I.Get<GameConfig>().BotHealth *
+					Mathf.Pow(
+						Root.I.Get<GameConfig>().LevelFactor , 
+						Root.I.Get<GameModeManager>().Current.Level
+				));
+			}
+		}
+
 		private void OnDestroy()
         {
             Root.I.Get<BotManager>().Unregister(this);
@@ -62,6 +73,7 @@ namespace unsernamespace
 		private void Awake()
         {
             OnChangeHealth.AddListener(CheckHealth);
+			health = MaxHealth;
 
 			PathingScript path = GetComponent<PathingScript>();
 			if ( null != path )
