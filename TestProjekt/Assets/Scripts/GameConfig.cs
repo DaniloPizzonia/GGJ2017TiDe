@@ -10,14 +10,29 @@ namespace unsernamespace
         public float BotHealth { get { return 10.0f; } }
         public float BotSpeed { get { return 10.0f; } }
         public int BotLevel { get { return 1; } }
-        public int BotReward { get { return 20; } }
-        //Tower
-        public float TowerDamage { get { return 20.0f; } }
-        public float TowerRange { get { return 20.0f; } }
-        public float TowerCooldown { get { return 5.0f; } }
-        public int TowerPrice { get { return 50; } }
+        public int BotReward { get { return 25; } }
+
+        //Rangetower
+        public float RangetowerDamage { get { return 20.0f; } }
+        public float RangetowerRange { get { return 4.0f; } }
+        public float RangetowerCooldown { get { return 0.5f; } }       
+
+        //AOETower
+        public float AOEDamage { get { return 10.0f; } }
+        public float AOERange { get { return 20.0f; } }
+        public float AOECooldown { get { return 0.7f; } }
+       
+        //SlowTower
+        public float SlowTowerDamage { get { return 5.0f; } }
+        public float SlowTowerRange { get { return 2.0f; } }
+        public float SlowTowerCooldown { get { return 0.7f; } }
+
+        //
+        public int TowerPrice { get { return 500; } }
         public int TowerLevel { get { return 1; } }
         public float TowerDamageRange { get { return 5.0f; } }
+        //
+
         //Player
         public int PlayerMoney { get { return 1500; } }
         public int PlayerLives { get { return 50; } }
@@ -25,6 +40,7 @@ namespace unsernamespace
 
         public float LevelFactor { get { return 2.3f; } }       
         public float WaveWaitTime { get { return 35.0f; } }
+        public float WaveReward { get { return 1.5f; } }
 
     }
 }

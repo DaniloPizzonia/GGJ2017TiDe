@@ -33,24 +33,27 @@ namespace unsernamespace
 			if(attackMode as AOE != null)
 			{
 				AOE aoe = attackMode as AOE;
-				aoe.SetDamage(UpgradeDamage(conf.TowerDamage, lvlFac, newLevel));
-				aoe.SetRange(UpgradeRange(conf.TowerRange, lvlFac, newLevel));
+				aoe.SetDamage(UpgradeDamage(conf.AOEDamage, lvlFac, newLevel));
+				aoe.SetRange(UpgradeRange(conf.AOERange, lvlFac, newLevel));
 				aoe.SetDamageRange(UpgradeRange(conf.TowerDamageRange, lvlFac, newLevel));
-			}
+                instance.Cooldown = UpgradeCooldown(conf.AOECooldown, newLevel);
+            }
 			else if(attackMode as SingleTarget != null)
 			{
 				SingleTarget st = attackMode as SingleTarget;
-				st.SetDamage(UpgradeDamage(conf.TowerDamage, lvlFac, newLevel));
-				st.SetRange(UpgradeRange(conf.TowerRange, lvlFac, newLevel));
-			}
+				st.SetDamage(UpgradeDamage(conf.RangetowerDamage, lvlFac, newLevel));
+				st.SetRange(UpgradeRange(conf.RangetowerRange, lvlFac, newLevel));
+                instance.Cooldown = UpgradeCooldown(conf.RangetowerCooldown, newLevel);
+            }
 			else
 			{
 				Slower slo = attackMode as Slower;
-				slo.SetDamage(UpgradeDamage(conf.TowerDamage, lvlFac, newLevel));
-				slo.SetRange(UpgradeRange(conf.TowerRange, lvlFac, newLevel));
-			}
+				slo.SetDamage(UpgradeDamage(conf.SlowTowerDamage, lvlFac, newLevel));
+				slo.SetRange(UpgradeRange(conf.SlowTowerRange, lvlFac, newLevel));
+                instance.Cooldown = UpgradeCooldown(conf.SlowTowerCooldown, newLevel);
+            }
 
-			instance.Cooldown = UpgradeCooldown(conf.TowerCooldown, newLevel);
+			//instance.Cooldown = UpgradeCooldown(conf.TowerCooldown, newLevel);
 		}
 	
 	}
