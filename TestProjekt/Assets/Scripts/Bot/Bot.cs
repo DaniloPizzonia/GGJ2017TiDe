@@ -27,6 +27,7 @@ namespace unsernamespace
 		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
 
 		private int wave;
+		private bool alive = true;
 
 		public float Health
 		{
@@ -75,12 +76,26 @@ namespace unsernamespace
 		private void Awake()
         {
             OnChangeHealth.AddListener(CheckHealth);
+
+			PathingScript path = GetComponent<PathingScript>();
+			if ( null != path )
+			{
+				path.OnExitReach.AddListener( () =>
+				{
+					if ( alive )
+					{
+						alive = false;
+						Root.I.Get<Player>().ReduceLife();
+					}
+				});
+			}
         }
 
         private void CheckHealth()
         {
             if (Health<=0)
             {
+				alive = false;
                 Destroy(gameObject);
             }
         }

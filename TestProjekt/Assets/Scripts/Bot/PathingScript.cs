@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace unsernamespace {
     public class PathingScript : MonoBehaviour
     {
         [SerializeField]
         private Bot bot;
-        // Please lock the rotation of the enemy!
+
+		[SerializeField]
+		private UnityEvent onExitReach = new UnityEvent();
+		public UnityEvent OnExitReach { get { return onExitReach; } }
+		// Please lock the rotation of the enemy!
 
 
-        // GameObject, that includes every pathNode as a child
-        GameObject pathNodeParent;
+		// GameObject, that includes every pathNode as a child
+		GameObject pathNodeParent;
 
         // Transform of the current pathNode the enemy is walking to
         Transform targetPathNode = null;
@@ -34,7 +39,6 @@ namespace unsernamespace {
 
             else
             {
-                Debug.Log("Exit reached.");
                 targetPathNode = null;
                 ExitReached();
             }
@@ -43,7 +47,7 @@ namespace unsernamespace {
 
         void ExitReached()
         {
-
+			onExitReach.Invoke();
             Destroy(gameObject);
         }
 
@@ -70,8 +74,6 @@ namespace unsernamespace {
 
             if (nextPathVector.magnitude <= distance)
             {
-                // When Node reached, assign targetPathNode = null to assign new PathNode
-                Debug.Log("Node Reached: " + targetPathNode.name);
                 targetPathNode = null;
             }
 
