@@ -13,7 +13,8 @@ namespace unsernamespace
 			{ "LowTide" , "Low Tide" },
 			{ "CoinPrefix" , "Coin: " },
 			{ "LifePrefix" , "Life: " },
-			{ "GameModeTimer" , "Next wave in: {0} seconds" }
+			{ "GameModeTimer" , "Next wave in: {0} seconds" },
+			{ "GameModeBotLeft" , "{0} creeps remaining" }
 		};
 
 		public string this[ string key ]

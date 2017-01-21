@@ -22,6 +22,14 @@ namespace unsernamespace
 			new Timer( Root.I.Get<GameConfig>().BotSpawnInterval , spawn );
 		}
 
+		public int BotLeft
+		{
+			get
+			{
+				return bot_to_spawn;
+			}
+		}
+
 		public override void Enter()
 		{
 			base.Enter();
