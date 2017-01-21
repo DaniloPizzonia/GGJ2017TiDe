@@ -15,7 +15,11 @@ namespace unsernamespace
 		[SerializeField]
 		private UpgradeEvent onUpgrade = new UpgradeEvent();
 		public UpgradeEvent OnUpgrade { get { return onUpgrade; } }
-		
+
+		[SerializeField]
+		private UnityEvent onUpgradeDone = new UnityEvent();
+		public UnityEvent OnUpgradeDone { get { return onUpgradeDone; } }
+
 		private Upgrade[] upgrade_all = new Upgrade[]
 		{
 			new UpgradeCooldown(),
@@ -66,8 +70,14 @@ namespace unsernamespace
 			}
 		}
 
+		private void OnClick()
+		{
+			Root.I.Get<UpgradeManager>().Upgrade( this );
+		}
+
 		public void Upgrade<T>() where T: Upgrade
 		{
+			bool success = false;
 			foreach( Upgrade upgrade in upgrade_all )
 			{
 				if ( upgrade is T )
@@ -75,8 +85,14 @@ namespace unsernamespace
 					if ( Root.I.Get<Player>().Buy( upgrade.price ) )
 					{
 						upgrade.UpgradeLevel();
+						success = true;
 					}
 				}
+			}
+
+			if ( success )
+			{
+				OnUpgradeDone.Invoke();
 			}
 		}
 

@@ -6,22 +6,38 @@ using UnityEngine;
 
 namespace unsernamespace
 {
-	public class UpgradeButton
+	public class UpgradeButton : MonoBehaviour
 	{
 		[SerializeField]
 		private UpgradeProperty type;
 
 		public void Click()
 		{
-			switch( type )
+
+			if (
+					!Root.I.Get<UpgradeManager>().Enabled
+				||	type != Root.I.Get<UpgradeManager>().Mode
+			)
 			{
-				case UpgradeProperty.Cooldown:
-					break;
-				case UpgradeProperty.Damage:
-					break;
-				case UpgradeProperty.Range:
-					break;
+				Root.I.Get<UpgradeManager>().Enable( type );
 			}
+			else
+			{
+				Root.I.Get<UpgradeManager>().Disable();
+			}
+		}
+
+		private void Update()
+		{
+
+			if (
+					Input.GetMouseButtonUp( 1 )
+				||	Input.GetKeyUp( KeyCode.Escape )
+			)
+			{
+				Root.I.Get<UpgradeManager>().Disable();
+			}
+
 		}
 	}
 }
