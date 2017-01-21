@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 namespace unsernamespace
 {
-	public class MoneyView : MonoBehaviour
+	public class LifeView : MonoBehaviour
 	{
 		private Text output = null;
 
 		private void Awake()
 		{
 			output = GetComponent<Text>();
-			Root.I.Get<Player>().OnChangeMoney.AddListener( update_view );
+			Root.I.Get<Player>().OnChangeLife.AddListener( update_view );
 			update_view();
 		}
 
@@ -22,7 +22,7 @@ namespace unsernamespace
 		{
 			if ( null != output )
 			{
-				output.text = Root.I.Get<Player>().Money.ToString();
+				output.text = Root.I.Get<Player>().Life.ToString();
 			}
 		}
 	}

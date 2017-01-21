@@ -15,17 +15,18 @@ namespace unsernamespace
 		private float speed;
 
 		[SerializeField]
-		public UnityEvent onChangeHealth = new UnityEvent();
+		private UnityEvent onChangeHealth = new UnityEvent();
 		public UnityEvent OnChangeHealth { get { return onChangeHealth; } }
 
         [SerializeField]
-        public UnityEvent onDie = new UnityEvent();
+		private UnityEvent onDie = new UnityEvent();
         public UnityEvent OnDie { get { return onDie; } }
 
         [SerializeField]
-		public UnityEvent onChangeSpeed = new UnityEvent();
+		private UnityEvent onChangeSpeed = new UnityEvent();
 		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
 
+		private int wave;
 
 		public float Health
 		{
@@ -52,14 +53,30 @@ namespace unsernamespace
 				onChangeSpeed.Invoke();
 			}
 		}
-        void OnDestroy()
+
+		public int Wave
+		{
+			get
+			{
+				return wave;
+			}
+		}
+
+		public void Bind( int wave )
+		{
+			this.wave = wave;
+		}
+
+		private void OnDestroy()
         {
             Root.I.Get<BotManager>().Unregister(this);
         }
-        void Awake()
+
+		private void Awake()
         {
             OnChangeHealth.AddListener(CheckHealth);
         }
+
         private void CheckHealth()
         {
             if (Health<=0)

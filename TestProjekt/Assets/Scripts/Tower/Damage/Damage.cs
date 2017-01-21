@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UnityEngine;
 
 namespace unsernamespace
 {
@@ -26,6 +26,11 @@ namespace unsernamespace
 		protected override void apply( Bot bot )
 		{
 			bot.Health -= internal_value;
+			Root.I.Get<Player>().GiveMoney(
+				Mathf.FloorToInt(
+					Root.I.Get<GameConfig>().BotReward * Mathf.Pow( bot.Wave , Root.I.Get<GameConfig>().WaveReward )
+				)
+			);
 		}
 	}
 }

@@ -7,12 +7,16 @@ namespace unsernamespace
 {
     public class Player : RootComponent
     {
-        private int live = Root.I.Get<GameConfig>().PlayerLives;
+        private int life = Root.I.Get<GameConfig>().PlayerLives;
         private int money = Root.I.Get<GameConfig>().PlayerMoney;
 
 		[SerializeField]
-		public UnityEvent onChangeMoney = new UnityEvent();
+		private UnityEvent onChangeMoney = new UnityEvent();
 		public UnityEvent OnChangeMoney { get { return onChangeMoney; } }
+
+		[SerializeField]
+		private UnityEvent onChangeLife = new UnityEvent();
+		public UnityEvent OnChangeLife { get { return onChangeLife; } }
 
 		public int Money
 		{
@@ -26,17 +30,22 @@ namespace unsernamespace
 				onChangeMoney.Invoke();
 			}
 		}
-		public int Live
+		public int Life
 		{
 			get
 			{
-				return live;
+				return life;
+			}
+			private set
+			{
+				life = value;
+				onChangeLife.Invoke();
 			}
 		}
 
         public int ReduceLife()
         {
-            return live--;
+            return Life--;
         }
 
 		public bool CheckMoney( int amount )
