@@ -31,6 +31,14 @@ namespace unsernamespace
 			}
 		}
 
+		public string Name
+		{
+			get
+			{
+				return prefab.name;
+			}
+		}
+
 		private void Update()
 		{
 			if ( last_mouse_position != Input.mousePosition )

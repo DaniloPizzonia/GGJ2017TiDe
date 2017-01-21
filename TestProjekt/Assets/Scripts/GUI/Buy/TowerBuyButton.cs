@@ -17,6 +17,8 @@ namespace unsernamespace
 		private Sprite icon_normal;
 		[SerializeField]
 		private Image image;
+		[SerializeField]
+		private Text description;
 
 		private TowerDelegate last_instance;
 
@@ -60,6 +62,7 @@ namespace unsernamespace
 					GameObject container = Instantiate( delegate_prefab );
 					TowerDelegate new_delegate = container.GetComponent<TowerDelegate>();
 					new_delegate.onLeave.AddListener( clear );
+					description.text = Root.I.Get<Localization>()[ "description_" + new_delegate.Name ];
 				}
 			}
 
