@@ -6,7 +6,7 @@ using System.Text;
 
 namespace unsernamespace
 {
-	public class RootComponent : UpdateManager
+	public class RootComponent
 	{
 		/// <summary>
 		/// Shortcut to root instance
