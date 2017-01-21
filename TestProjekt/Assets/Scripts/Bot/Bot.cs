@@ -10,7 +10,6 @@ namespace unsernamespace
 	public class Bot : MonoBehaviour
 	{
 		private float health;
-        [SerializeField]
 		private float speed;
 
 		[SerializeField]
@@ -74,6 +73,7 @@ namespace unsernamespace
         {
             OnChangeHealth.AddListener(CheckHealth);
 			health = MaxHealth;
+			speed = Root.I.Get<GameConfig>().BotSpeed;
 
 			PathingScript path = GetComponent<PathingScript>();
 			if ( null != path )

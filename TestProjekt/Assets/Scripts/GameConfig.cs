@@ -8,7 +8,7 @@ namespace unsernamespace
     {
         //Bot
         public float BotHealth { get { return 10.0f; } }
-        public float BotSpeed { get { return 10.0f; } }
+        public float BotSpeed { get { return 5.0f; } }
         public int BotLevel { get { return 1; } }
         public int BotReward { get { return 25; } }
 		public int BotPerLevel { get { return 20; } }
