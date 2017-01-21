@@ -43,6 +43,7 @@ namespace unsernamespace {
 
         void ExitReached()
         {
+
             Destroy(gameObject);
         }
 

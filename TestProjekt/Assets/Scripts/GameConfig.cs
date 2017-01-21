@@ -17,13 +17,14 @@ namespace unsernamespace
         public float TowerCooldown { get { return 5.0f; } }
         public int TowerPrice { get { return 50; } }
         public int TowerLevel { get { return 1; } }
+        public float TowerDamageRange { get { return 5.0f; } }
         //Player
         public int PlayerMoney { get { return 1500; } }
         public int PlayerLives { get { return 50; } }
-       
+        
 
-        public float LevelFactor { get { return 2.3f; } }
-        public float DamageRange { get { return 5.0f; } }
+        public float LevelFactor { get { return 2.3f; } }       
+        public float WaveWaitTime { get { return 35.0f; } }
 
     }
 }
