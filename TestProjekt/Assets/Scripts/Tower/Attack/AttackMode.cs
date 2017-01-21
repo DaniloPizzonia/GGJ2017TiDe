@@ -36,6 +36,8 @@ namespace unsernamespace
 		public void Shot( Bot target , DamageEffect damage_effect )
 		{
 			GameObject container = Instantiate( bullet_prefab );
+			container.transform.position = transform.position;
+			container.transform.localScale = Vector3.one;
 			Bullet bullet = container.GetComponent<Bullet>();
 			if ( null == bullet )
 			{

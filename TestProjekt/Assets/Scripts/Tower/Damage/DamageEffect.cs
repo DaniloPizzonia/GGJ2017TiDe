@@ -18,7 +18,7 @@ namespace unsernamespace
 
 		public bool Apply()
 		{ 
-			if ( !is_applyed )
+			if ( is_applyed )
 			{
 				return false;
 			}

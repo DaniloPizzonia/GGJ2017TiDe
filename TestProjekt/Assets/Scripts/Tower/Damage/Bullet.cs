@@ -11,13 +11,21 @@ namespace unsernamespace
 	{
 		private DamageEffect damage;
 		private Bot target;
+		private float start;
 
 		[SerializeField]
 		private float speed;
+		[SerializeField]
+		private float timeout;
 
 		[SerializeField]
 		public UnityEvent onHit = new UnityEvent();
 		public UnityEvent OnHit { get { return onHit; } }
+
+		private void Awake()
+		{
+			start = Time.time;
+		}
 
 		public void Bind( DamageEffect damage , Bot target )
 		{
@@ -34,10 +42,23 @@ namespace unsernamespace
 				transform.position = Vector3.MoveTowards( position , target_postion , Time.deltaTime * speed );
 				transform.LookAt( new Vector3( target_postion.x , position.y , target_postion.z ) );
 			}
+
+			if ( Time.time - start > timeout )
+			{
+				OnCollisionEnter( null );
+			}
 		}
 
-		private void OnCollisionDamage()
+		private void OnCollisionEnter( Collision collision )
 		{
+			if (
+					null != collision
+				&&	collision.gameObject.layer != LayerMask.NameToLayer( "Bot" )
+			)
+			{
+				return;
+			}
+
 			if ( null != damage )
 			{
 				if ( damage.Apply() )
@@ -45,6 +66,7 @@ namespace unsernamespace
 					onHit.Invoke();
 				}
 			}
+			Destroy( gameObject );
 		}
 	}
 }
