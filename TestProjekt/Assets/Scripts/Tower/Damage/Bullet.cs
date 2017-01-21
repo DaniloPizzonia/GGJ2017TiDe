@@ -29,8 +29,10 @@ namespace unsernamespace
 		{
 			if ( null != target )
 			{
-				transform.position = Vector3.MoveTowards( transform.position , target.transform.position , Time.deltaTime * speed );
-				transform.LookAt( target.transform.position );
+				Vector3 target_postion = target.transform.position;
+				Vector3 position = transform.position;
+				transform.position = Vector3.MoveTowards( position , target_postion , Time.deltaTime * speed );
+				transform.LookAt( new Vector3( target_postion.x , position.y , target_postion.z ) );
 			}
 		}
 
