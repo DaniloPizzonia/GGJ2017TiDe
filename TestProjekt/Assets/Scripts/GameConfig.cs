@@ -11,9 +11,11 @@ namespace unsernamespace
         public float BotSpeed { get { return 10.0f; } }
         public int BotLevel { get { return 1; } }
         public int BotReward { get { return 25; } }
+		public int BotPerLevel { get { return 20; } }
+		public int BotSpawnInterval { get { return 1; } }
 
-        //Rangetower
-        public float RangetowerDamage { get { return 20.0f; } }
+		//Rangetower
+		public float RangetowerDamage { get { return 20.0f; } }
         public float RangetowerRange { get { return 4.0f; } }
         public float RangetowerCooldown { get { return 0.5f; } }       
 
@@ -39,8 +41,8 @@ namespace unsernamespace
         
 
         public float LevelFactor { get { return 2.3f; } }       
-        public float WaveWaitTime { get { return 35.0f; } }
-        public float WaveReward { get { return 1.5f; } }
+        public float LowTideDuration { get { return 35.0f; } }
+        public float LevelRewardFactor { get { return 1.5f; } }
 
     }
 }

@@ -7,11 +7,13 @@ namespace unsernamespace
 {
     public class LowTide : GameMode
     {
+		private float start = 0;
+
 		public float TimeLeft
 		{
 			get
 			{
-				return 0;
+				return Mathf.Max( Root.I.Get<GameConfig>().LowTideDuration - ( Time.time - start ) , 0 );
 			}
 		}
 
@@ -21,6 +23,17 @@ namespace unsernamespace
 			{
 				return GameModeType.LowTide;
 			}
+		}
+
+		public override bool Check()
+		{
+			return 0 >= TimeLeft;
+		}
+
+		public override void Enter()
+		{
+			base.Enter();
+			start = Time.time;
 		}
 	}
 }

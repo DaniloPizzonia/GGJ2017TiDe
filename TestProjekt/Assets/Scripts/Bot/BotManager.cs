@@ -7,13 +7,6 @@ namespace unsernamespace
 {
     public class BotManager : RootComponent
     {
-        public BotManager()
-        {
-            Timer timer = new Timer(1, () =>
-            {
-                SpawnBot();
-            });
-        }
         private List<Bot> bots = new List<Bot>();
 
 
