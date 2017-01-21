@@ -13,6 +13,15 @@ namespace unsernamespace
 		[SerializeField]
 		private float range = 0;
 
+		public void SetDamage(float value)
+		{
+			damage = value;
+		}
+		public void SetRange(float value)
+		{
+			range = value;
+		}
+
 		protected override bool attack()
 		{
 			Bot[] bot_list = get_target_list();

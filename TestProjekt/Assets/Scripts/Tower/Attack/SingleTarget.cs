@@ -14,6 +14,15 @@ namespace unsernamespace
 		[SerializeField]
 		private float range = 0;
 
+		public void SetDamage(float value)
+		{
+			damage = value;
+		}
+		public void SetRange(float value)
+		{
+			range = value;
+		}
+
 		protected override bool attack()
 		{
 			Bot nearest = Root.I.Get<BotManager>().AllBots.OrderBy( a => Vector3.Distance( a.transform.position , transform.position ) ).FirstOrDefault();

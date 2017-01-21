@@ -16,6 +16,26 @@ namespace unsernamespace
 
 		private float last_shoot;
 
+		public AttackMode Attack_Mode
+		{
+			get
+			{
+				return attack_mode;
+			}
+			set { }
+		}
+		public float Cooldown
+		{
+			get
+			{
+				return cooldown;
+			}
+			set
+			{
+				cooldown = value;
+			}
+		}
+
 		public void Attack()
 		{
 			if (

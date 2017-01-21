@@ -11,6 +11,11 @@ namespace unsernamespace
 		[SerializeField]
 		private float damage_range;
 
+		public void SetDamageRange(float value)
+		{
+			damage_range = value;
+		}
+
 		protected override DamageEffect get_damage_effect( Bot target ,float damage )
 		{
 			return new FieldDamage( damage , damage_range , target );
