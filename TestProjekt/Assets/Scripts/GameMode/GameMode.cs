@@ -4,16 +4,24 @@ using UnityEngine;
 
 namespace unsernamespace
 {
-    public class GameMode
-    {
-       
+	public abstract class GameMode
+	{
+		public GameMode()
+		{
 
-        public GameMode()
-        {
-            
-        }
+		}
 
+		public abstract GameModeType Type
+		{
+			get;
+		}
 
-    }
+		public int Index
+		{
+			get
+			{
+				return 0;
+			}
+		}
+	}
 }
-

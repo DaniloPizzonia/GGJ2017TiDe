@@ -47,6 +47,14 @@ namespace unsernamespace
 			}
 		}
 
+		private void Awake()
+		{
+			Root.I.Get<GameModeManager>().OnChange.AddListener( () =>
+			{
+				transform.position = Vector3.zero;
+			});
+		}
+
 		private void Update()
 		{
 			if ( Time.time - last_shoot > cooldown )

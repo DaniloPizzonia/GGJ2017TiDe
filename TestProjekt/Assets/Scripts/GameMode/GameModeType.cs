@@ -5,7 +5,7 @@ using System.Text;
 
 namespace unsernamespace
 {
-    enum GameModeType
+    public enum GameModeType
     {
         HighTide = 0,
         LowTide

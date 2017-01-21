@@ -25,8 +25,7 @@ namespace unsernamespace
         [SerializeField]
 		private UnityEvent onChangeSpeed = new UnityEvent();
 		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
-
-		private int wave;
+		
 		private bool alive = true;
 
 		public float Health
@@ -55,19 +54,6 @@ namespace unsernamespace
 			}
 		}
 
-		public int Wave
-		{
-			get
-			{
-				return wave;
-			}
-		}
-
-		public void Bind( int wave )
-		{
-			this.wave = wave;
-		}
-
 		private void OnDestroy()
         {
             Root.I.Get<BotManager>().Unregister(this);
@@ -93,7 +79,7 @@ namespace unsernamespace
 
         private void CheckHealth()
         {
-            if (Health<=0)
+            if ( Health <= 0 )
             {
 				alive = false;
                 Destroy(gameObject);
