@@ -9,7 +9,6 @@ namespace unsernamespace
     {
         private List<Bot> bots = new List<Bot>();
 
-
         public Bot[] AllBots
         {
             get { return bots.ToArray(); }

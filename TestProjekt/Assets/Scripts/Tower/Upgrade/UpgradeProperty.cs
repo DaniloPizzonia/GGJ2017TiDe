@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 namespace unsernamespace
 {
-	public class Upgrade
+	public enum UpgradeProperty
 	{
+		Damage,
+		Range,
+		Cooldown
 	}
 }

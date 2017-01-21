@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 namespace unsernamespace
 {
@@ -11,10 +11,17 @@ namespace unsernamespace
 	{
 		[SerializeField]
 		private AttackMode attack_mode;
-		[SerializeField]
-		private float cooldown;
 
-		private float last_shoot;
+		[SerializeField]
+		private UpgradeEvent onUpgrade = new UpgradeEvent();
+		public UpgradeEvent OnUpgrade { get { return onUpgrade; } }
+		
+		private Upgrade[] upgrade_all = new Upgrade[]
+		{
+			new UpgradeCooldown(),
+			new UpgradeDamage(),
+			new UpgradeRange()
+		};
 
 		public AttackMode Attack_Mode
 		{
@@ -24,43 +31,54 @@ namespace unsernamespace
 			}
 			set { }
 		}
-		public float Cooldown
-		{
-			get
-			{
-				return cooldown;
-			}
-			set
-			{
-				cooldown = value;
-			}
-		}
-
-		public void Attack()
-		{
-			if (
-					null != attack_mode
-				&&	attack_mode.Attack()
-			)
-			{
-				last_shoot = Time.time;
-			}
-		}
 
 		private void Awake()
 		{
 			Root.I.Get<GameModeManager>().OnChange.AddListener( () =>
 			{
 				transform.position = Vector3.zero;
-			});
+			} );
+
+			bind_upgrade();
+
+			foreach ( Upgrade upgrade in upgrade_all )
+			{
+				upgrade.UpgradeLevel();
+			}
+		}
+
+		private void bind_upgrade()
+		{
+			foreach ( Upgrade upgrade in upgrade_all )
+			{
+				upgrade.OnUpgrade.AddListener( ( UpgradeProperty property , int level , float factor ) =>
+				{
+					OnUpgrade.Invoke( property , level , factor );
+				});
+			}
 		}
 
 		private void Update()
 		{
-			if ( Time.time - last_shoot > cooldown )
+			if ( null != attack_mode )
 			{
-				Attack();
+				attack_mode.Attack();
 			}
 		}
+
+		public void Upgrade<T>() where T: Upgrade
+		{
+			foreach( Upgrade upgrade in upgrade_all )
+			{
+				if ( upgrade is T )
+				{
+					if ( Root.I.Get<Player>().Buy( upgrade.price ) )
+					{
+						upgrade.UpgradeLevel();
+					}
+				}
+			}
+		}
+
 	}
 }

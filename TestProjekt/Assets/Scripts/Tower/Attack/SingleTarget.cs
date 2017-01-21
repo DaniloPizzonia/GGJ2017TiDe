@@ -6,22 +6,32 @@ using UnityEngine;
 
 namespace unsernamespace
 {
-	public class SingleTarget : AttackMode
+	public class SingleTarget : RangeDamageAttackMode
 	{
-
-		[SerializeField]
-		private float damage;
-		[SerializeField]
-		private float range = 0;
-
-		public void SetDamage(float value)
+		protected override float cooldown_factor
 		{
-			damage = value;
+			get
+			{
+				return Root.I.Get<GameConfig>().RangetowerDamage;
+			}
 		}
-		public void SetRange(float value)
+
+		protected override float damage_factor
 		{
-			range = value;
+			get
+			{
+				return Root.I.Get<GameConfig>().RangetowerDamage;
+			}
 		}
+
+		protected override float range_factor
+		{
+			get
+			{
+				return Root.I.Get<GameConfig>().RangetowerDamage;
+			}
+		}
+
 
 		protected override bool attack()
 		{
@@ -29,11 +39,11 @@ namespace unsernamespace
 
 			if (
 					null != nearest
-				&&	range >= Vector3.Distance( nearest.transform.position , transform.position )
+				&&	Range >= Vector3.Distance( nearest.transform.position , transform.position )
 			)
 			{
 				transform.LookAt( nearest.transform );
-				Shot( nearest , get_damage_effect( nearest , damage ) );
+				Shot( nearest , get_damage_effect( nearest , Damage ) );
 				return true;
 			}
 
@@ -43,7 +53,7 @@ namespace unsernamespace
 
 		protected virtual DamageEffect get_damage_effect( Bot target , float amount )
 		{
-			return new Damage( damage , target );
+			return new Damage( Damage , target );
 		}
 	}
 }

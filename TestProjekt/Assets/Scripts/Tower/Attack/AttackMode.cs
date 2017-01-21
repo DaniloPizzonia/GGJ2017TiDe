@@ -9,7 +9,6 @@ namespace unsernamespace
 {
 	public abstract class AttackMode : MonoBehaviour
 	{
-
 		[SerializeField]
 		private GameObject bullet_prefab;
 
@@ -21,14 +20,41 @@ namespace unsernamespace
 		public UnityEvent onShot = new UnityEvent();
 		public UnityEvent OnShoot { get { return onShot; } }
 
+		private float last_shoot;
+		private float cooldown;
+
 		public bool Attack()
 		{
-			bool success = attack();
-			if ( success )
+			bool success = false;
+			if ( Time.time - last_shoot > cooldown )
 			{
-				onAttack.Invoke();
+				success = attack();
+				if ( success )
+				{
+					onAttack.Invoke();
+					last_shoot = Time.time;
+				}
 			}
+
 			return success;
+		}
+
+		public virtual void Bind( Tower tower )
+		{
+			tower.OnUpgrade.AddListener( ( UpgradeProperty property , int level , float factor ) =>
+			{
+				switch ( property )
+				{
+					case UpgradeProperty.Cooldown:
+						cooldown = cooldown_factor * Mathf.Pow( 0.9f , level - 1 );
+						break;
+				}
+			});
+		}
+
+		protected abstract float cooldown_factor
+		{
+			get;
 		}
 
 		protected abstract bool attack();

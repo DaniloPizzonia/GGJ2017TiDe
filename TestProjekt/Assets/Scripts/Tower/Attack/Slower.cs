@@ -6,20 +6,30 @@ using UnityEngine;
 
 namespace unsernamespace
 {
-	public class Slower : AttackMode
+	public class Slower : RangeDamageAttackMode
 	{
-		[SerializeField]
-		private float damage;
-		[SerializeField]
-		private float range = 0;
-
-		public void SetDamage(float value)
+		protected override float cooldown_factor
 		{
-			damage = value;
+			get
+			{
+				return Root.I.Get<GameConfig>().SlowTowerCooldown;
+			}
 		}
-		public void SetRange(float value)
+
+		protected override float damage_factor
 		{
-			range = value;
+			get
+			{
+				return Root.I.Get<GameConfig>().SlowTowerDamage;
+			}
+		}
+
+		protected override float range_factor
+		{
+			get
+			{
+				return Root.I.Get<GameConfig>().SlowTowerRange;
+			}
 		}
 
 		protected override bool attack()
@@ -28,7 +38,7 @@ namespace unsernamespace
 
 			foreach ( Bot target in bot_list)
 			{
-				Shot( target , new Speed( damage , target ) );
+				Shot( target , new Speed( Damage , target ) );
 			}
 
 			return bot_list.Length > 0;
@@ -36,7 +46,7 @@ namespace unsernamespace
 
 		protected virtual Bot[] get_target_list()
 		{
-			return Root.I.Get<BotManager>().AllBots.Where( a => Vector3.Distance( transform.position , a.transform.position ) <= range ).ToArray();
+			return Root.I.Get<BotManager>().AllBots.Where( a => Vector3.Distance( transform.position , a.transform.position ) <= Range ).ToArray();
 		}
 	}
 }
