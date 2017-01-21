@@ -30,7 +30,7 @@ namespace unsernamespace
         public float SlowTowerCooldown { get { return 0.7f; } }
 
         //
-        public int TowerPrice { get { return 500; } }
+        public int TowerPrice { get { return 500 ; } }
         public int TowerLevel { get { return 1; } }
         public float TowerDamageRange { get { return 5.0f; } }
         //
