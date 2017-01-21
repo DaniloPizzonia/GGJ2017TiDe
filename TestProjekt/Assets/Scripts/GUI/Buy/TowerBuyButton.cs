@@ -46,6 +46,10 @@ namespace unsernamespace
 			}
 		}
 
+		private void Awake()
+		{
+			Root.I.Get<GameModeManager>().OnChange.AddListener( update_icon_all );
+		}
 
 		public void Click()
 		{

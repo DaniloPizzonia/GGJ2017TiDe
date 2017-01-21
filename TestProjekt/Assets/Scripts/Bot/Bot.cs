@@ -20,7 +20,7 @@ namespace unsernamespace
 		private UnityEvent onDie = new UnityEvent();
         public UnityEvent OnDie { get { return onDie; } }
 
-        [SerializeField]
+		[SerializeField]
 		private UnityEvent onChangeSpeed = new UnityEvent();
 		public UnityEvent OnChangeSpeed { get { return onChangeSpeed; } }
 		
@@ -89,10 +89,25 @@ namespace unsernamespace
 			}
         }
 
+		private void reward()
+		{
+			int level = Root.I.Get<GameModeManager>().Current.Level;
+
+			Root.I.Get<Player>().GiveMoney(
+				Mathf.FloorToInt(
+					Root.I.Get<GameConfig>().BotReward * Mathf.Pow( level , Root.I.Get<GameConfig>().LevelRewardFactor )
+				)
+			);
+		}
+
         private void CheckHealth()
         {
             if ( Health <= 0 )
             {
+				if ( alive )
+				{
+					reward();
+				}
 				alive = false;
                 Destroy(gameObject);
             }

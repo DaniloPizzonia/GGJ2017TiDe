@@ -50,7 +50,7 @@ namespace unsernamespace
 
 		public bool CheckMoney( int amount )
 		{
-			return money > amount;
+			return money >= amount;
 		}
 
         public bool Buy( int amount )

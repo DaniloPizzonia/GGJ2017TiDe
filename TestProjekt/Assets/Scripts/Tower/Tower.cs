@@ -40,10 +40,14 @@ namespace unsernamespace
 		{
 			Root.I.Get<GameModeManager>().OnChange.AddListener( () =>
 			{
-				transform.position = Vector3.zero;
+				transform.localPosition = Vector3.zero;
 			} );
 
 			bind_upgrade();
+			if ( null != attack_mode )
+			{
+				attack_mode.Bind( this );
+			}
 
 			foreach ( Upgrade upgrade in upgrade_all )
 			{
@@ -70,7 +74,7 @@ namespace unsernamespace
 			}
 		}
 
-		private void OnClick()
+		private void OnMouseUp()
 		{
 			Root.I.Get<UpgradeManager>().Upgrade( this );
 		}

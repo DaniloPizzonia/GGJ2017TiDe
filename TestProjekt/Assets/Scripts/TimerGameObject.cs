@@ -39,7 +39,7 @@ namespace unsernamespace
 		
 		public void Update()
 		{
-			float time = Time.realtimeSinceStartup;
+			float time = Time.time;
 
 			lock( timer_list  )
 			{

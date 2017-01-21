@@ -12,7 +12,7 @@ namespace unsernamespace
 		{
 			get
 			{
-				return Root.I.Get<GameConfig>().RangetowerDamage;
+				return Root.I.Get<GameConfig>().RangetowerCooldown;
 			}
 		}
 
@@ -28,7 +28,7 @@ namespace unsernamespace
 		{
 			get
 			{
-				return Root.I.Get<GameConfig>().RangetowerDamage;
+				return Root.I.Get<GameConfig>().RangetowerRange;
 			}
 		}
 
@@ -42,7 +42,9 @@ namespace unsernamespace
 				&&	Range >= Vector3.Distance( nearest.transform.position , transform.position )
 			)
 			{
-				transform.LookAt( nearest.transform );
+				Vector3 target_position = nearest.transform.position;
+				target_position.y = transform.position.y;
+				transform.LookAt( target_position );
 				Shot( nearest , get_damage_effect( nearest , Damage ) );
 				return true;
 			}

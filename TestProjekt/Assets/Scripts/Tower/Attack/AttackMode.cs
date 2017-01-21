@@ -46,7 +46,7 @@ namespace unsernamespace
 				switch ( property )
 				{
 					case UpgradeProperty.Cooldown:
-						cooldown = cooldown_factor * Mathf.Pow( 0.9f , level - 1 );
+						cooldown = cooldown_factor * Mathf.Pow( Root.I.Get<GameConfig>().LevelCooldownFactor , level );
 						break;
 				}
 			});

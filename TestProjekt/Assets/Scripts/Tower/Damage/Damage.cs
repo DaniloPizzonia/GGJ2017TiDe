@@ -26,13 +26,6 @@ namespace unsernamespace
 		protected override void apply( Bot bot )
 		{
 			bot.Health -= internal_value;
-			int level = Root.I.Get<GameModeManager>().Current.Level;
-
-			Root.I.Get<Player>().GiveMoney(
-				Mathf.FloorToInt(
-					Root.I.Get<GameConfig>().BotReward * Mathf.Pow( level , Root.I.Get<GameConfig>().LevelRewardFactor )
-				)
-			);
 		}
 	}
 }

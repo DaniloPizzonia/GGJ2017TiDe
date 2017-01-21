@@ -20,8 +20,8 @@ namespace unsernamespace
 			this.action = action;
 			Interval = interval;
 			Enabled = true;
-			NextTick = Time.realtimeSinceStartup + Interval;
-			LastTick = Time.realtimeSinceStartup;
+			NextTick = Time.time + Interval;
+			LastTick = Time.time;
 
 			GameObject.Register( this );
 		}

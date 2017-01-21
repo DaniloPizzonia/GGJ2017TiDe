@@ -45,10 +45,10 @@ namespace unsernamespace
 				switch ( property )
 				{
 					case UpgradeProperty.Damage:
-						damage = damage_factor * lvl + ( lvl - 1.0f ) * Root.I.Get<GameConfig>().LevelFactor * 2.0f;
+						damage = damage_factor * Mathf.Pow( Root.I.Get<GameConfig>().LevelFactor , lvl );
 						break;
 					case UpgradeProperty.Range:
-						range = range_factor * ( 1.0f + Root.I.Get<GameConfig>().LevelFactor * 0.1f * lvl );
+						range = range_factor * Mathf.Pow( Root.I.Get<GameConfig>().LevelFactor , lvl );
 						break;
 				}
 			});

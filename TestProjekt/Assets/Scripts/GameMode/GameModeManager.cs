@@ -16,8 +16,8 @@ namespace unsernamespace
 		private GameMode current;
 		private GameMode[] mode_list = new GameMode[]
 		{
-			new HighTide(),
-			new LowTide()
+			new LowTide(),
+			new HighTide()
 		};
 
 		public GameMode Current
