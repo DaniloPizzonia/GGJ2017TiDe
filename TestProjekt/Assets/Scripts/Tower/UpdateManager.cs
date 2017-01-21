@@ -8,7 +8,7 @@ namespace unsernamespace
 {
 	public class UpdateManager
 	{
-		public Update Update
+		public Upgrade Update
 		{
 			get
 			{

@@ -6,21 +6,17 @@ namespace unsernamespace
 {
     public class Player : RootComponent
     {
-        [SerializeField]
-        private int lifepoints;
-        [SerializeField]
-        private int money;
+        private int lives = Root.I.Get<GameConfig>().PlayerLives;
+        private int money = Root.I.Get<GameConfig>().PlayerMoney;
 
-        public int Lifepoints { get { return lifepoints; } set { value = lifepoints; } }
-        public int Money { get { return money; } set {value = money; } }
-
-        public void ReduceLifepoints()
+        public int ReduceLife()
         {
-            this.Lifepoints--;
+            return lives--;
         }
-        public void ReduceMoney(int price)
+
+        public int ReduceMoney(int towerPrice)
         {
-            
+            return money - towerPrice;
         }
     }
 
