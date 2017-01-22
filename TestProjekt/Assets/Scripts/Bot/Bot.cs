@@ -117,6 +117,7 @@ namespace unsernamespace
 					reward();
 				}
 				alive = false;
+				onDie.Invoke();
                 Destroy(gameObject);
             }
         }

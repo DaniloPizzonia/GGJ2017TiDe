@@ -20,6 +20,10 @@ namespace unsernamespace
 		private UnityEvent onUpgradeDone = new UnityEvent();
 		public UnityEvent OnUpgradeDone { get { return onUpgradeDone; } }
 
+		[SerializeField]
+		private UnityEvent onCollision = new UnityEvent();
+		public UnityEvent OnCollision { get { return onCollision; } }
+
 		private Upgrade[] upgrade_all = new Upgrade[]
 		{
 			new UpgradeCooldown(),
@@ -41,6 +45,11 @@ namespace unsernamespace
 
 		public void Awake()
 		{
+			if ( null == attack_mode )
+			{
+				return;
+			}
+
 			Root.I.Get<GameModeManager>().OnChange.AddListener( () =>
 			{
 				transform.localPosition = Vector3.zero;
@@ -98,6 +107,14 @@ namespace unsernamespace
 			}
 
 			return null;
+		}
+
+		private void OnCollisionEnter( Collision collision )
+		{
+			if ( null != collision.gameObject.GetComponent<Tower>() )
+			{
+				onCollision.Invoke();
+			}
 		}
 	}
 }
