@@ -64,6 +64,14 @@ namespace unsernamespace
 			}
 		}
 
+		public virtual float InitialSpeed
+		{
+			get
+			{
+				return Root.I.Get<GameConfig>().BotSpeed;
+			}
+		}
+
 		private void OnDestroy()
         {
             Root.I.Get<BotManager>().Unregister(this);
@@ -73,7 +81,7 @@ namespace unsernamespace
         {
             OnChangeHealth.AddListener(CheckHealth);
 			health = MaxHealth;
-			speed = Root.I.Get<GameConfig>().BotSpeed;
+			speed = InitialSpeed;
 
 			PathingScript path = GetComponent<PathingScript>();
 			if ( null != path )

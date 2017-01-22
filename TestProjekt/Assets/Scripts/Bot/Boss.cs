@@ -10,12 +10,22 @@ namespace unsernamespace
 	{
 		[SerializeField]
 		private float health_factor;
+		[SerializeField]
+		private float speed_factor = 1;
 
 		public override int MaxHealth
 		{
 			get
 			{
 				return Mathf.CeilToInt( base.MaxHealth * health_factor );
+			}
+		}
+
+		public override float InitialSpeed
+		{
+			get
+			{
+				return base.InitialSpeed * speed_factor;
 			}
 		}
 	}
