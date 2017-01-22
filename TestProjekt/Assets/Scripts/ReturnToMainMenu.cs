@@ -7,7 +7,7 @@ namespace unsernamespace
 {
     public class ReturnToMainMenu : MonoBehaviour
     {
-        [SerializeField]
+   /*     [SerializeField]
         public Transform target;
         public Text levelText = null;
         // Use this for initialization
@@ -37,7 +37,7 @@ namespace unsernamespace
         {
             int level = Root.I.Get<GameModeManager>().Current.Level;
             levelText.text = "Level Record: <b><size=36>" + level + "</size></b>";
-        }
+        }*/
     }
 }
 

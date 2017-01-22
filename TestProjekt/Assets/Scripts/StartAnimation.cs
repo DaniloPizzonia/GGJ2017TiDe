@@ -25,12 +25,19 @@ public class StartAnimation : MonoBehaviour
 		shootParticleSystem = particleSystemGO.GetComponent<ParticleSystem> ();
 	}
 		
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			TriggerAnimation ();
+		}
+	}
 
 	public void TriggerAnimation()
 	{
 		animator.SetTrigger ("Shoot");
 
 		clone = (GameObject)Instantiate (particleSystemGO, shootPivot);
-		Destroy (clone,1.0f);
+		Destroy (clone,4.0f);
 	}
 }
