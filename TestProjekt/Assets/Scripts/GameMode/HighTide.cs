@@ -73,7 +73,7 @@ namespace unsernamespace
 				return high_level ? "boss" : "cthulhu";
 			}
 			// At higher levels, regular bosses may spawn as normal mobs:
-			if ( high_level && UnityEngine.Random.Range( 0 , 100 ) < 50 )
+			if ( high_level && UnityEngine.Random.Range( 0 , 100 ) < 5 )
 			{
 				return "boss";
 			}
