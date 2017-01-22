@@ -9,6 +9,7 @@ namespace unsernamespace
 	{
 		public float position;
 		public float amplitude;
+		public float xComp;
 	}
 
 	public class ShipController : MonoBehaviour
@@ -41,7 +42,7 @@ namespace unsernamespace
 		{
 			ExtendWaveStream();
 
-			tex = new Texture2D( 100 , 16 , TextureFormat.RGBA32 , false , true );
+			tex = new Texture2D( 100 , 16 );
 			tex.filterMode = FilterMode.Point;
 			tex.wrapMode = TextureWrapMode.Clamp;
 			pixels = new Color[ tex.width * tex.height ];
@@ -70,6 +71,7 @@ namespace unsernamespace
 				peak.amplitude = amplitude;
 				streamLength += Mathf.Abs( amplitude ) * 3.0f;
 				peak.position = streamLength;
+				peak.xComp = Random.Range( -1.0f , 1.0f );
 
 				waves.Add( peak );
 			}
@@ -106,8 +108,6 @@ namespace unsernamespace
 					float a = 0;
 					if ( y < fill )
 						a = 1;
-					//else if ( y < fill + 1 )
-					//	a = 0.5f;
 
 					pixels[ y * 100 + x ].a = a;
 				}
@@ -178,7 +178,7 @@ namespace unsernamespace
         }
 		*/
 
-		private float UpdateWaveStream()
+		private Vector3 UpdateWaveStream()
 		{
 			bool isFirst = true;
 			bool killFirst = false;
@@ -214,7 +214,10 @@ namespace unsernamespace
 
 			float passedFactor = passed / distance;
 
-			return Mathf.SmoothStep( cur.amplitude , nxt.amplitude , passedFactor );
+			float compX = Mathf.SmoothStep( cur.xComp , nxt.xComp , passedFactor );
+			float amp = Mathf.SmoothStep( cur.amplitude , nxt.amplitude , passedFactor );
+
+			return new Vector3( compX , amp , 1.0f - compX );
 		}
 
 		private void ApplyWaveTilt( Transform trans , float strength , float waveState )
@@ -235,9 +238,12 @@ namespace unsernamespace
 
 			Vector2 input = new Vector2( x * userForces.x , y * userForces.y );
 
-			float curWave = UpdateWaveStream();
+			Vector3 curWave = UpdateWaveStream();
 
-			Vector3 physForce = new Vector3( input.x + curWave * otherWaveMultiplier , 0.0f , input.y );
+			float waveX = curWave.x * otherWaveMultiplier * curWave.y;
+			float waveY = curWave.z * otherWaveMultiplier * curWave.y;
+
+			Vector3 physForce = new Vector3( input.x + waveX * otherWaveMultiplier , 0.0f , input.y + waveY );
 
 			foreach ( Tower tower in Root.I.Get<TowerManager>().All )
 			{
@@ -246,8 +252,8 @@ namespace unsernamespace
 
 			if ( waterPlane != null )
 			{
-				ApplyWaveTilt( Camera.main.transform , waveCameraSway , curWave );
-				ApplyWaveTilt( waterPlane , waveCameraSway , curWave );
+				ApplyWaveTilt( Camera.main.transform , waveCameraSway , curWave.y );
+				ApplyWaveTilt( waterPlane , waveCameraSway , curWave.y );
 			}
 		}
 	}

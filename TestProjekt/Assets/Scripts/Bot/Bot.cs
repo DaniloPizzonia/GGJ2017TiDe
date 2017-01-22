@@ -52,7 +52,7 @@ namespace unsernamespace
 			}
 		}
 
-		public int MaxHealth
+		public virtual int MaxHealth
 		{
 			get
 			{
