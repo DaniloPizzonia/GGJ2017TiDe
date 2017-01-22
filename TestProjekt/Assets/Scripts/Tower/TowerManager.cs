@@ -33,7 +33,21 @@ namespace unsernamespace
 			{
 				current = value;
 				OnChangeSelection.Invoke();
+				create_selection( value );
 			}
+		}
+
+		private void create_selection( Tower target )
+		{
+			if ( null == target )
+			{
+				return;
+			}
+			GameObject selection = GameObject.Instantiate( Resources.Load<GameObject>( "selection" ) );
+			selection.transform.SetParent( target.transform , true );
+			selection.transform.localPosition = Vector3.zero;
+			selection.transform.localScale = new Vector3( 0.2f , 0.2f , 0.2f );
+			selection.GetComponent<TowerSelection>().Bind( target );
 		}
 
 		public Tower Create( GameObject prefab , TowerContainer parent , Action<Tower> callback=null )
@@ -54,6 +68,8 @@ namespace unsernamespace
 			{
 				tower_collection.Add( tower );
 			}
+
+			Current = tower;
 			return tower;
 		}
 
