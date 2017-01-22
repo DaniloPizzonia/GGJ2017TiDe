@@ -15,11 +15,15 @@ namespace unsernamespace
 		private UpgradeEvent onUpgrade = new UpgradeEvent();
 		public UpgradeEvent OnUpgrade { get { return onUpgrade; } }
 
+		[SerializeField]
+		private UnityEvent onLevelUp = new UnityEvent();
+		public UnityEvent OnLevelUp { get { return onLevelUp; } }
+
 		public int price
 		{
 			get
 			{
-				return Mathf.CeilToInt( Root.I.Get<GameConfig>().TowerPrice * Mathf.Pow( 1.5f , level ) );
+				return Mathf.CeilToInt( Root.I.Get<GameConfig>().TowerUpdatePrice * Mathf.Pow( 1.5f , level ) );
 			}
 		}
 
@@ -27,6 +31,7 @@ namespace unsernamespace
 		{
 			level++;
 			apply();
+			onLevelUp.Invoke();
 		}
 
 		protected void upgrade_property( UpgradeProperty property , float factor=1 )

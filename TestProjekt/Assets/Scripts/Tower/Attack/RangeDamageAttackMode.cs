@@ -53,5 +53,19 @@ namespace unsernamespace
 				}
 			});
 		}
+
+		protected override string[] description_param
+		{
+			get
+			{
+				return new string[]
+				{
+					Name,
+					Mathf.FloorToInt( Damage ).ToString(),
+					Mathf.FloorToInt( Range ).ToString(),
+					Cooldown.ToString()
+				};
+			}
+		}
 	}
 }

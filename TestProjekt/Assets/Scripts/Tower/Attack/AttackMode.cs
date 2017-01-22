@@ -57,6 +57,14 @@ namespace unsernamespace
 			get;
 		}
 
+		public float Cooldown
+		{
+			get
+			{
+				return cooldown;
+			}
+		}
+
 		protected abstract bool attack();
 
 		public void Shot( Bot target , DamageEffect damage_effect )
@@ -72,6 +80,29 @@ namespace unsernamespace
 
 			bullet.Bind( damage_effect , target );
 			onShot.Invoke();
+		}
+
+		public override string ToString()
+		{
+			string term = Root.I.Get<Localization>()[ "description_" + GetType().Name.ToLower() ];
+
+			return string.Format( term , description_param );
+		}
+
+		public string Name
+		{
+			get
+			{
+				return Root.I.Get<Localization>()[ "name_" + GetType().Name.ToLower() ];
+			}
+		}
+
+		protected virtual string[] description_param
+		{
+			get
+			{
+				return new string[] { Name };
+			}
 		}
 	}
 }

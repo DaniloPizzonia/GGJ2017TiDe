@@ -2,19 +2,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 namespace unsernamespace
 {
 	public class TowerManager : RootComponent
 	{
 		private List<Tower> tower_collection = new List<Tower>();
+		private Tower current;
+
+		[SerializeField]
+		private UnityEvent onChangeSelection = new UnityEvent();
+		public UnityEvent OnChangeSelection { get { return onChangeSelection; } }
 
 		public Tower[] All
 		{
 			get
 			{
 				return tower_collection.ToArray();
+			}
+		}
+
+		public Tower Current
+		{
+			get
+			{
+				return current;
+			}
+			set
+			{
+				current = value;
+				OnChangeSelection.Invoke();
 			}
 		}
 

@@ -14,7 +14,13 @@ namespace unsernamespace
 			{ "CoinPrefix" , "Coin: " },
 			{ "LifePrefix" , "Life: " },
 			{ "GameModeTimer" , "Next wave in: {0} seconds" },
-			{ "GameModeBotLeft" , "{0} creeps remaining" }
+			{ "GameModeBotLeft" , "{0} creeps remaining" },
+			{ "description_singletarget" , "Name: {0}\nDamage: {1}\nRange: {2}\nCooldown: {3}s" },
+			{ "description_aoe" , "Name: {0}\nDamage: {1}\nRange: {2}\nCooldown: {3}s" },
+			{ "description_slower" , "Name: {0}\nDamage: {1}\nRange: {2}\nCooldown: {3}s" },
+			{ "name_singletarget" , "Single target" },
+			{ "name_aoe" , "AOE" },
+			{ "name_slower" , "Slower" }
 		};
 
 		public string this[ string key ]

@@ -42,6 +42,10 @@ namespace unsernamespace
 				transform.position = Vector3.MoveTowards( position , target_postion , Time.deltaTime * speed );
 				transform.LookAt( new Vector3( target_postion.x , position.y , target_postion.z ) );
 			}
+			else
+			{
+				Destroy( gameObject );
+			}
 
 			if ( Time.time - start > timeout )
 			{

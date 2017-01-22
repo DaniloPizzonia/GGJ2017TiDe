@@ -11,6 +11,8 @@ namespace unsernamespace
 	{
 		[SerializeField]
 		private GameObject prefab;
+		[SerializeField]
+		private string localization_key;
 
 		[SerializeField]
 		public UnityEvent onApply = new UnityEvent();
@@ -32,11 +34,11 @@ namespace unsernamespace
 			}
 		}
 
-		public string Name
+		public string Description
 		{
 			get
 			{
-				return prefab.name;
+				return Root.I.Get<Localization>()[ localization_key ];
 			}
 		}
 

@@ -62,7 +62,12 @@ namespace unsernamespace
 				upgrade.OnUpgrade.AddListener( ( UpgradeProperty property , int level , float factor ) =>
 				{
 					OnUpgrade.Invoke( property , level , factor );
-				});
+				} );
+
+				upgrade.OnLevelUp.AddListener( () =>
+				{
+					OnUpgradeDone.Invoke();
+				} );
 			}
 		}
 
@@ -76,29 +81,20 @@ namespace unsernamespace
 
 		private void OnMouseUp()
 		{
-			Root.I.Get<UpgradeManager>().Upgrade( this );
+			Root.I.Get<TowerManager>().Current = this;
 		}
 
-		public void Upgrade<T>() where T: Upgrade
+		public T Upgrade<T>() where T : Upgrade
 		{
-			bool success = false;
-			foreach( Upgrade upgrade in upgrade_all )
+			foreach ( Upgrade upgrade in upgrade_all )
 			{
 				if ( upgrade is T )
 				{
-					if ( Root.I.Get<Player>().Buy( upgrade.price ) )
-					{
-						upgrade.UpgradeLevel();
-						success = true;
-					}
+					return upgrade as T;
 				}
 			}
 
-			if ( success )
-			{
-				OnUpgradeDone.Invoke();
-			}
+			return null;
 		}
-
 	}
 }

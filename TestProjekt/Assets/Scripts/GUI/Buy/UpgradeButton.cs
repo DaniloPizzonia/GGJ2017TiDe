@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace unsernamespace
 {
@@ -11,33 +12,59 @@ namespace unsernamespace
 		[SerializeField]
 		private UpgradeProperty type;
 
+		private void Awake()
+		{
+			Root.I.Get<TowerManager>().OnChangeSelection.AddListener( update_icon );
+			update_icon();
+		}
+
 		public void Click()
 		{
-
-			if (
-					!Root.I.Get<UpgradeManager>().Enabled
-				||	type != Root.I.Get<UpgradeManager>().Mode
-			)
+			Tower current = Root.I.Get<TowerManager>().Current;
+			if ( null == current )
 			{
-				Root.I.Get<UpgradeManager>().Enable( type );
+				return;
 			}
-			else
+			Upgrade upgrade = get_upgrade( current );
+			if ( null == upgrade )
 			{
-				Root.I.Get<UpgradeManager>().Disable();
+				return;
+			}
+			if ( Root.I.Get<Player>().Buy( upgrade.price ) )
+			{
+				upgrade.UpgradeLevel();
+			}
+
+			Root.I.Get<TowerManager>().OnChangeSelection.Invoke();
+		}
+
+		private void update_icon()
+		{
+			Button button = GetComponent<Button>();
+			if ( null != button )
+			{
+				Tower current = Root.I.Get<TowerManager>().Current;
+				button.interactable =
+						current != null
+					&&	Root.I.Get<Player>().CheckMoney( get_upgrade( current ).price );
 			}
 		}
 
-		private void Update()
+		private Upgrade get_upgrade( Tower tower )
 		{
-
-			if (
-					Input.GetMouseButtonUp( 1 )
-				||	Input.GetKeyUp( KeyCode.Escape )
-			)
+			switch ( type )
 			{
-				Root.I.Get<UpgradeManager>().Disable();
+				case UpgradeProperty.Damage:
+					return tower.Upgrade<UpgradeDamage>();
+					break;
+				case UpgradeProperty.Range:
+					return tower.Upgrade<UpgradeRange>();
+					break;
+				case UpgradeProperty.Cooldown:
+					return tower.Upgrade<UpgradeCooldown>();
+					break;
 			}
-
+			return null;
 		}
 	}
 }

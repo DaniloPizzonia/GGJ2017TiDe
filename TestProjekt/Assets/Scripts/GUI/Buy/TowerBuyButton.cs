@@ -49,6 +49,7 @@ namespace unsernamespace
 		private void Awake()
 		{
 			Root.I.Get<GameModeManager>().OnChange.AddListener( update_icon_all );
+			Root.I.Get<TowerManager>().OnChangeSelection.AddListener( clear );
 		}
 
 		public void Click()
@@ -63,10 +64,14 @@ namespace unsernamespace
 			{
 				if ( buyable )
 				{
+					Root.I.Get<TowerManager>().Current = null;
 					GameObject container = Instantiate( delegate_prefab );
 					TowerDelegate new_delegate = container.GetComponent<TowerDelegate>();
 					new_delegate.onLeave.AddListener( clear );
-					description.text = Root.I.Get<Localization>()[ "description_" + new_delegate.Name ];
+					if ( null != description )
+					{
+						description.text = new_delegate.Description;
+					}
 				}
 			}
 
