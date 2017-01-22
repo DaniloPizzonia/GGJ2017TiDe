@@ -12,6 +12,9 @@ namespace unsernamespace
 		[SerializeField]
 		private UpgradeProperty type;
 
+		//FIXIT
+		public GameObject upgradeParticlePrefab;
+
 		private void Awake()
 		{
 			Root.I.Get<TowerManager>().OnChangeSelection.AddListener( update_icon );
@@ -34,6 +37,10 @@ namespace unsernamespace
 			if ( Root.I.Get<Player>().Buy( upgrade.price ) )
 			{
 				upgrade.UpgradeLevel();
+
+				// FIXIT
+				GameObject clone = Instantiate (upgradeParticlePrefab, current.transform.position, Quaternion.identity);
+				Destroy (clone, 3f);
 			}
 
 			Root.I.Get<TowerManager>().OnChangeSelection.Invoke();
