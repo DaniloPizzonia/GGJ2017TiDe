@@ -36,7 +36,7 @@ namespace unsernamespace
             {
                 var bot = botList[i];
                 Vector3 screenPos = Camera.main.WorldToScreenPoint(bot.transform.position+new Vector3(0,2));
-                var a = bot.Health / bot.MaxHealth * 100;
+                var a = bot.Health / bot.MaxHealth;
                 Image img = healthBars[i];
                 img.fillAmount = a;
                 img.transform.localPosition = screenPos;
