@@ -16,8 +16,19 @@ namespace unsernamespace
 
         private string SelectBotType()
         {
-            bool bossRound = Root.I.Get<GameModeManager>().Current.Level % 2 == 0;
-            if(bossRound)
+            GameModeManager gmm = Root.I.Get<GameModeManager>();
+
+            int level = gmm.Current.Level;
+            bool bossRound = level % 5 == 0;
+            bool highLevel = level > 10;
+
+            // At regular intervals, boss mobs will spawn:
+            if (bossRound)
+            {
+                return highLevel ? "boss" : "cthulhu";
+            }
+            // At higher levels, regular bosses may spawn as normal mobs:
+            if(highLevel && Random.Range(0, 100) < 50)
             {
                 return "boss";
             }
