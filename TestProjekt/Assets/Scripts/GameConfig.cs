@@ -21,20 +21,20 @@ namespace unsernamespace
 		public int BossAmount { get { return 1; } }
 
 		//Rangetower
-		public float RangetowerDamage { get { return 15.0f; } }
-        public float RangetowerRange { get { return 3f; } }
+		public float RangetowerDamage { get { return 17.0f; } }
+        public float RangetowerRange { get { return 4f; } }
         public float RangetowerCooldown { get { return 1f; } }       
 
         //AOETower
-        public float AOEDamage { get { return 10.0f; } }
+        public float AOEDamage { get { return 12.0f; } }
         public float AOERange { get { return 3.0f; } }
         public float AOECooldown { get { return 5.0f; } }
         public float AOESplashRange { get { return 3.0f; } }
        
         //SlowTower
-        public float SlowTowerDamage { get { return 0.05f; } }
+        public float SlowTowerDamage { get { return 0.25f; } }
         public float SlowTowerRange { get { return 3.0f; } }
-        public float SlowTowerCooldown { get { return 0.7f; } }
+        public float SlowTowerCooldown { get { return 0.5f; } }
 
         //
         public int TowerPrice { get { return 1000 ; } } //Tower Price = 1000
