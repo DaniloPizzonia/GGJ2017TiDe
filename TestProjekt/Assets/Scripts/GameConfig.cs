@@ -52,7 +52,7 @@ namespace unsernamespace
         public float LowTideDuration { get { return 35.0f; } }
         public float LevelRewardFactor { get { return 1.01f; } }
 		public float LevelCooldownFactor { get { return 0.75f; } }
-		public float LevelReward { get { return 750f; } }
+		public float LevelReward { get { return 10f; } }
 
 	}
 }
