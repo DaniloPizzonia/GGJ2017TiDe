@@ -41,6 +41,11 @@ namespace unsernamespace
 			transform.LookAt( new Vector3( target_postion.x , position.y , target_postion.z ) );
 		}
 
+		protected virtual void ImpactParticles (Collision col)
+		{
+			
+		}
+
 		private void Update()
 		{
 			if ( null != target )
@@ -75,6 +80,8 @@ namespace unsernamespace
 					onHit.Invoke();
 				}
 			}
+
+			ImpactParticles (collision);
 			Destroy( gameObject );
 		}
 	}

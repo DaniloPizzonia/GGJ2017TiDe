@@ -10,6 +10,8 @@ namespace unsernamespace
 		private float speedY;
 		private Vector3 origin;
 
+		public GameObject explosionPrefab;
+
 		public override void Bind (DamageEffect damage, Bot target)
 		{
 			base.Bind (damage, target);
@@ -34,6 +36,16 @@ namespace unsernamespace
 			transform.position += velocity * Time.deltaTime;
 		}
 	
+		protected override void ImpactParticles (Collision col)
+		{
+			Vector3 pos = col.contacts [0].point;
+			Vector3 nor = col.contacts [0].normal;
+
+			Quaternion rot = Quaternion.LookRotation (nor);
+
+			GameObject clone = Instantiate (explosionPrefab, pos, rot);
+			Destroy (clone, 2f);
+		}
 	}
 
 }
