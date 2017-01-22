@@ -10,11 +10,11 @@ namespace unsernamespace
 	public class Bullet : MonoBehaviour
 	{
 		private DamageEffect damage;
-		private Bot target;
+		protected Bot target;
 		private float start;
 
 		[SerializeField]
-		private float speed;
+		protected float speed;
 		[SerializeField]
 		private float timeout;
 
@@ -27,20 +27,25 @@ namespace unsernamespace
 			start = Time.time;
 		}
 
-		public void Bind( DamageEffect damage , Bot target )
+		public virtual void Bind( DamageEffect damage , Bot target )
 		{
 			this.damage = damage;
 			this.target = target;
+		}
+
+		protected virtual void UpdateTrajectory ()
+		{
+			Vector3 target_postion = target.transform.position;
+			Vector3 position = transform.position;
+			transform.position = Vector3.MoveTowards( position , target_postion , Time.deltaTime * speed );
+			transform.LookAt( new Vector3( target_postion.x , position.y , target_postion.z ) );
 		}
 
 		private void Update()
 		{
 			if ( null != target )
 			{
-				Vector3 target_postion = target.transform.position;
-				Vector3 position = transform.position;
-				transform.position = Vector3.MoveTowards( position , target_postion , Time.deltaTime * speed );
-				transform.LookAt( new Vector3( target_postion.x , position.y , target_postion.z ) );
+				UpdateTrajectory ();
 			}
 			else
 			{
