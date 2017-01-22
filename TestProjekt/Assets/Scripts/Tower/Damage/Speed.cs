@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UnityEngine;
 
 namespace unsernamespace
 {
@@ -25,7 +25,7 @@ namespace unsernamespace
 
 		protected override void apply( Bot bot )
 		{
-			bot.Speed -= internal_value;
+			bot.Speed = Mathf.Max( Root.I.Get<GameConfig>().BotMinSpeed ,  ( bot.Speed - ( internal_value * ( 1 / ( bot.InitialSpeed / bot.Speed ) ) ) ) );
 		}
 	}
 }

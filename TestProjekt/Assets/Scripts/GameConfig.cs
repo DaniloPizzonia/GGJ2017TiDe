@@ -9,7 +9,8 @@ namespace unsernamespace
         //Bot
         public float BotHealth { get { return 20.0f; } }
         public float BotSpeed { get { return 5.0f; } }
-        public int BotLevel { get { return 1; } }
+		public float BotMinSpeed { get { return 1.0f; } }
+		public int BotLevel { get { return 1; } }
         public int BotReward { get { return 50; } }
 		public int BotPerLevel { get { return 20; } }
 		public int BotSpawnInterval { get { return 1; } }
@@ -30,7 +31,7 @@ namespace unsernamespace
         public float AOECooldown { get { return 0.7f; } }
        
         //SlowTower
-        public float SlowTowerDamage { get { return 5.0f; } }
+        public float SlowTowerDamage { get { return 0.05f; } }
         public float SlowTowerRange { get { return 3.0f; } }
         public float SlowTowerCooldown { get { return 0.7f; } }
 
