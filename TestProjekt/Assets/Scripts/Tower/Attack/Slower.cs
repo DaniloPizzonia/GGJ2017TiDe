@@ -48,5 +48,19 @@ namespace unsernamespace
 		{
 			return Root.I.Get<BotManager>().AllBots.Where( a => Vector3.Distance( transform.position , a.transform.position ) <= Range ).ToArray();
 		}
+
+		protected override string[] description_param
+		{
+			get
+			{
+				return new string[]
+				{
+					Name,
+					Mathf.FloorToInt( Damage * 100 ).ToString(),
+					Mathf.FloorToInt( Range ).ToString(),
+					Cooldown.ToString()
+				};
+			}
+		}
 	}
 }
