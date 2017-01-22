@@ -43,7 +43,7 @@ namespace unsernamespace
 				switch ( property )
 				{
 					case UpgradeProperty.Damage:
-						damage_range = range_factor * ( 1.0f + Root.I.Get<GameConfig>().LevelFactor * 0.1f * lvl );
+						damage_range = range_factor * (  Root.I.Get<GameConfig>().AOESplashRange+ Root.I.Get<GameConfig>().LevelFactor * 0.1f * lvl ); //original 1.0f
 						break;
 				}
 			} );

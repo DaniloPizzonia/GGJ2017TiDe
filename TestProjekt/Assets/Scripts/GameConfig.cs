@@ -28,7 +28,8 @@ namespace unsernamespace
         //AOETower
         public float AOEDamage { get { return 10.0f; } }
         public float AOERange { get { return 3.0f; } }
-        public float AOECooldown { get { return 0.7f; } }
+        public float AOECooldown { get { return 5.0f; } }
+        public float AOESplashRange { get { return 3.0f; } }
        
         //SlowTower
         public float SlowTowerDamage { get { return 0.05f; } }
