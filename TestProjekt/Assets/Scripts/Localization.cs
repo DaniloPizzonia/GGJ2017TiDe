@@ -13,6 +13,8 @@ namespace unsernamespace
 			{ "LowTide" , "Low Tide" },
 			{ "CoinPrefix" , "Coin: " },
 			{ "LifePrefix" , "Life: " },
+			{ "upgrade" , "Upgrades" },
+			{ "tower" , "Tower" },
 			{ "GameModeTimer" , "Next wave in: {0} seconds" },
 			{ "GameModeBotLeft" , "{0} creeps remaining" },
 			{ "description_singletarget" , "Name: {0}\nDamage: {1}\nRange: {2}\nCooldown: {3}s" },
