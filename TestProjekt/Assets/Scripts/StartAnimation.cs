@@ -18,27 +18,51 @@ public class StartAnimation : MonoBehaviour
 
 	GameObject clone;
 
+	bool isParticleOn = false;
+
+	float timer;
+	float particleEnd = 3;
+
 
 	void Start()
 	{
 		animator = animationGO.GetComponent<Animator> ();
 		shootParticleSystem = particleSystemGO.GetComponent<ParticleSystem> ();
+
+		timer = 0;
 	}
 		
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+
+		if (isParticleOn)
+		{
+			timer += Time.deltaTime;
+
+			if (timer < 3)
+			{
+				isParticleOn = false;
+				timer = 0;
+			}
+		}
+
+/*		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			TriggerAnimation ();
-		}	
+		}	*/
 	}
 
 	public void TriggerAnimation()
 	{
+		
 		animator.SetTrigger ("Shoot");
 
-		clone = (GameObject)Instantiate (particleSystemGO, shootPivot.position, shootPivot.rotation);
-		clone.transform.SetParent(shootPivot);
-		Destroy (clone,4.0f);
+		if (!isParticleOn) {
+			clone = (GameObject)Instantiate (particleSystemGO, shootPivot.position, shootPivot.rotation);
+			clone.transform.SetParent (shootPivot);
+			Destroy (clone, 4.0f);
+
+			isParticleOn = true;
+		}
 	}
 }
