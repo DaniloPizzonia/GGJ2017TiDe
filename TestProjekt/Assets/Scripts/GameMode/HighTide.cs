@@ -36,6 +36,15 @@ namespace unsernamespace
 			bot_to_spawn = get_bot_amount();
 		}
 
+		public override void Leave()
+		{
+			base.Leave();
+			Root.I.Get<Player>().GiveMoney(
+				Mathf.FloorToInt(
+				Root.I.Get<GameConfig>().LevelReward * Mathf.Pow( Root.I.Get<GameConfig>().LevelFactor , Level )
+			));
+		}
+
 		public override bool Check()
 		{
 			return	0 >= bot_to_spawn
