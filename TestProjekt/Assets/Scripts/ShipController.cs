@@ -20,7 +20,6 @@ namespace unsernamespace
 
         public float waveFrequency = 0.1f;
 
-        private List<Rigidbody> towers = new List<Rigidbody>();
         private List<OceanWavePeak> waves = new List<OceanWavePeak>();
 
         public float waveRollSpeed = 2.0f;
@@ -31,12 +30,12 @@ namespace unsernamespace
 
         [Range(1, 16)]
         public int divisions = 4;
+		public float waveCameraSway = 1.5f;
 
 
-        void Start()
+
+		void Start()
         {
-            towers.AddRange(GameObject.FindObjectsOfType<Rigidbody>());
-
             ExtendWaveStream();
         }
 
@@ -125,7 +124,6 @@ namespace unsernamespace
         {
             bool isFirst = true;
             bool killFirst = false;
-            float height = 0.0f;
 
             for (int i = 0; i < waves.Count; ++i)
             {
@@ -176,27 +174,24 @@ namespace unsernamespace
 
         void FixedUpdate()
         {
-            x = Input.GetAxis("Horizontal");
-            y = Input.GetAxis("Vertical");
+            x = Input.GetAxisRaw("Horizontal");
+            y = Input.GetAxisRaw("Vertical");
 
             Vector2 input = new Vector2(x * userForces.x, y * userForces.y);
 
             float curWave = UpdateWaveStream();
 
-            if (towers != null)
-            {
-                Vector3 physForce = new Vector3(input.x + curWave * otherWaveMultiplier, 0.0f, input.y);
+            Vector3 physForce = new Vector3(input.x + curWave * otherWaveMultiplier, 0.0f, input.y);
 
-                foreach (Rigidbody rig in towers)
-                {
-                    rig.AddForce(physForce);
-                }
+            foreach (Tower tower in Root.I.Get<TowerManager>().All)
+            {
+				tower.GetComponent<Rigidbody>().AddForce(physForce);
             }
 
             if(waterPlane != null)
             {
-                ApplyWaveTilt(Camera.main.transform, 1.0f, curWave);
-                ApplyWaveTilt(waterPlane, -0.7f, curWave);
+                ApplyWaveTilt(Camera.main.transform, waveCameraSway, curWave);
+                ApplyWaveTilt(waterPlane, waveCameraSway  * - 0.7f, curWave);
             }
         }
     }

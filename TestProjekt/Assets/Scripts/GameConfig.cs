@@ -33,6 +33,7 @@ namespace unsernamespace
         public int TowerPrice { get { return 1000 ; } }
         public int TowerLevel { get { return 1; } }
         public float TowerDamageRange { get { return 5.0f; } }
+		public float TowerUpdatePrice { get { return 500.0f; } }
         //
 
         //Player
