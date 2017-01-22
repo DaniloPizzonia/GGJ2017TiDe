@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UnityEngine.SceneManagement;
 
 namespace unsernamespace
 {
@@ -42,6 +42,13 @@ namespace unsernamespace
 			}
 
 			return component_collection[ type ] as T;
+		}
+
+		public void Reset()
+		{
+			component_collection = new Dictionary<Type , RootComponent>();
+			Scene scene = SceneManager.GetActiveScene();
+			SceneManager.LoadScene( scene.name );
 		}
 	}
 }
