@@ -14,9 +14,21 @@ namespace unsernamespace
             get { return bots.ToArray(); }
         }
 
+        private string SelectBotType()
+        {
+            bool bossRound = Root.I.Get<GameModeManager>().Current.Level % 2 == 0;
+            if(bossRound)
+            {
+                return "boss";
+            }
+
+            return "bot";
+        }
+
         public Bot SpawnBot()
         {
-            Bot spawnedBot = Root.I.Get<BotFactory>().CreateBot();
+            string botType = SelectBotType();
+            Bot spawnedBot = Root.I.Get<BotFactory>().CreateBot(botType);
             bots.Add(spawnedBot);
             return spawnedBot;
         }

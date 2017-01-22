@@ -13,9 +13,9 @@ namespace unsernamespace
             return Root.I.Get<GameConfig>().BotLevel * Root.I.Get<GameConfig>().BotHealth;
         }
 
-        public Bot CreateBot()
+        public Bot CreateBot(string botName)
         {
-            GameObject bot = GameObject.Instantiate(Resources.Load<GameObject>("bot"));
+            GameObject bot = GameObject.Instantiate(Resources.Load<GameObject>(botName));
             return bot.GetComponent<Bot>();
         }
 	}
