@@ -52,11 +52,42 @@ namespace unsernamespace
 				return;
 			}
 			bot_to_spawn--;
-			Root.I.Get<BotManager>().SpawnBot();
+			Root.I.Get<BotManager>().SpawnBot( SelectBotType() );
+		}
+
+		private bool is_boss_level
+		{
+			get
+			{
+				return Level % Root.I.Get<GameConfig>().BossInterval == 0;
+			}
+		}
+
+		private string SelectBotType()
+		{
+			bool high_level = Level > Root.I.Get<GameConfig>().BossHighCut;
+
+			// At regular intervals, boss mobs will spawn:
+			if ( is_boss_level )
+			{
+				return high_level ? "boss" : "cthulhu";
+			}
+			// At higher levels, regular bosses may spawn as normal mobs:
+			if ( high_level && UnityEngine.Random.Range( 0 , 100 ) < 50 )
+			{
+				return "boss";
+			}
+
+			return "bot";
 		}
 
 		protected virtual int get_bot_amount()
 		{
+			if ( is_boss_level )
+			{
+				return Root.I.Get<GameConfig>().BossAmount;
+			}
+
 			return Root.I.Get<GameConfig>().BotPerLevel;
 		}
 	}

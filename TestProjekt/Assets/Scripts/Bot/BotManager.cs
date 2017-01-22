@@ -14,32 +14,9 @@ namespace unsernamespace
             get { return bots.ToArray(); }
         }
 
-        private string SelectBotType()
+        public Bot SpawnBot( string type )
         {
-            GameModeManager gmm = Root.I.Get<GameModeManager>();
-
-            int level = gmm.Current.Level;
-            bool bossRound = level % 5 == 0;
-            bool highLevel = level > 10;
-
-            // At regular intervals, boss mobs will spawn:
-            if (bossRound)
-            {
-                return highLevel ? "boss" : "cthulhu";
-            }
-            // At higher levels, regular bosses may spawn as normal mobs:
-            if(highLevel && Random.Range(0, 100) < 50)
-            {
-                return "boss";
-            }
-
-            return "bot";
-        }
-
-        public Bot SpawnBot()
-        {
-            string botType = SelectBotType();
-            Bot spawnedBot = Root.I.Get<BotFactory>().CreateBot(botType);
+            Bot spawnedBot = Root.I.Get<BotFactory>().CreateBot( type );
             bots.Add(spawnedBot);
             return spawnedBot;
         }

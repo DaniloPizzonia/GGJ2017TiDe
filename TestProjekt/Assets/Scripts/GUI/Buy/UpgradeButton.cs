@@ -15,6 +15,7 @@ namespace unsernamespace
 		private void Awake()
 		{
 			Root.I.Get<TowerManager>().OnChangeSelection.AddListener( update_icon );
+			Root.I.Get<GameModeManager>().OnChange.AddListener( update_icon );
 			update_icon();
 		}
 

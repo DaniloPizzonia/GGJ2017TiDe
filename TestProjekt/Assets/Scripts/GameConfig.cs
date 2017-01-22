@@ -14,6 +14,11 @@ namespace unsernamespace
 		public int BotPerLevel { get { return 20; } }
 		public int BotSpawnInterval { get { return 1; } }
 
+		//Boss
+		public int BossInterval { get { return 5; } }
+		public int BossHighCut { get { return 10; } }
+		public int BossAmount { get { return 1; } }
+
 		//Rangetower
 		public float RangetowerDamage { get { return 15.0f; } }
         public float RangetowerRange { get { return 3f; } }
