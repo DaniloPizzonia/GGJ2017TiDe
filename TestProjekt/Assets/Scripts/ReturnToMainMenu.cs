@@ -7,15 +7,19 @@ namespace unsernamespace
 {
     public class ReturnToMainMenu : MonoBehaviour
     {
-   /*     [SerializeField]
-        public Transform target;
-        public Text levelText = null;
+        [SerializeField]
+        private Transform target;
+
         // Use this for initialization
         void Start()
         {
             //OnDie Listener
-            Root.I.Get<Player>().OnDie.AddListener(show);
-            SetHighestScore();
+            Root.I.Get<Player>().OnDie.AddListener(() =>
+			{
+				show();
+				Root.I.Reset();
+				show();
+			} );
         }
 
         // Update is called once per frame
@@ -24,20 +28,17 @@ namespace unsernamespace
             if (Input.GetKeyUp(KeyCode.Escape))
             {
                 show();
-                SetHighestScore();
             }
         }
 
         private void show()
         {
-            target.gameObject.SetActive(true);
-            Time.timeScale = 0;
+			if ( null != target )
+			{
+				target.gameObject.SetActive( true );
+				Time.timeScale = 0;
+			}
         }
-        public void SetHighestScore()
-        {
-            int level = Root.I.Get<GameModeManager>().Current.Level;
-            levelText.text = "Level Record: <b><size=36>" + level + "</size></b>";
-        }*/
     }
 }
 

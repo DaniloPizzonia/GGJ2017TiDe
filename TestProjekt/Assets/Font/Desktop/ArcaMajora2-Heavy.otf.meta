@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0b5e09ce53405e147a65106bd690f69f
+timeCreated: 1485089827
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Arca Majora 2
+  fontNames:
+  - Arca Majora 2
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
