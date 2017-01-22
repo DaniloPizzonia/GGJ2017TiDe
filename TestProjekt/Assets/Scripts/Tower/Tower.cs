@@ -33,10 +33,13 @@ namespace unsernamespace
 			{
 				return attack_mode;
 			}
-			set { }
+			set
+			{
+				attack_mode = value;
+			}
 		}
 
-		private void Awake()
+		public void Awake()
 		{
 			Root.I.Get<GameModeManager>().OnChange.AddListener( () =>
 			{

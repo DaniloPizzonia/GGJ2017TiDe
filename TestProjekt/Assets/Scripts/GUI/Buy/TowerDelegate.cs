@@ -11,8 +11,6 @@ namespace unsernamespace
 	{
 		[SerializeField]
 		private GameObject prefab;
-		[SerializeField]
-		private string localization_key;
 
 		[SerializeField]
 		public UnityEvent onApply = new UnityEvent();
@@ -31,14 +29,6 @@ namespace unsernamespace
 			get
 			{
 				return Root.I.Get<TowerManager>().Price();
-			}
-		}
-
-		public string Description
-		{
-			get
-			{
-				return Root.I.Get<Localization>()[ localization_key ];
 			}
 		}
 

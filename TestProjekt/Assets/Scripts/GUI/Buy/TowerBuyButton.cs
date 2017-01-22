@@ -70,7 +70,16 @@ namespace unsernamespace
 					new_delegate.onLeave.AddListener( clear );
 					if ( null != description )
 					{
-						description.text = new_delegate.Description;
+						AttackMode attack = new_delegate.GetComponent<AttackMode>();
+						if ( null != attack )
+						{
+							GameObject temp_object = new GameObject();
+							Tower tower = temp_object.AddComponent<Tower>();
+							tower.Attack_Mode = temp_object.AddComponent( attack.GetType() ) as AttackMode;
+							tower.Awake();
+							description.text = tower.Attack_Mode.ToString();
+							Destroy( temp_object );
+						}
 					}
 				}
 			}
